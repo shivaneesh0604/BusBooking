@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    tools:context=".View.PassengerDetailsFragment">
+
+    <TextView
+        android:id="@+id/passengerInfoTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/marginStart"
+        android:text="@string/passenger_information" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/passengerDetailsRecyclerView"
+        android:layout_below="@+id/passengerInfoTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bookSeatButton"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bookseats"
+        android:background="@color/red"/>
+
+</RelativeLayout>
