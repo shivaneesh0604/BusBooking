@@ -38,10 +38,10 @@ class SelectedTripFragment(private val selectedTripID: Int, private val seatingT
 
         binding.busNameSelectedTrip.text = tripDetails.travelsName
         binding.busRatingSelectedTrip.text = tripDetails.busRating.toString()
-        binding.boardingTimeSelectedTrip.text = tripDetails.boardingArea.toString() + " - "
+        binding.boardingAreaSelectedTrip.text = tripDetails.boardingArea.toString() + " - "
         binding.droppingAreaSelectedTrip.text = tripDetails.droppingArea.toString()
         binding.dateSelectedTrip.text = tripDetails.dateSelectedTrip
-        binding.boardingTimeSelectedTrip.text = tripDetails.boardingTime
+        binding.boardingTimeSelectedTrip.text = tripDetails.boardingTime + " - "
         binding.droppingTimeSelectedTrip.text = tripDetails.droppingTIme
 
         val busLayout = binding.seatLayout
