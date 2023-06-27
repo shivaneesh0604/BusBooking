@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.busbooking.DataClass.PassengerDetailsDataClass
@@ -55,6 +56,13 @@ class PassengerDetailsFragment(
                 Toast.makeText(requireContext(), "Fill all data's", Toast.LENGTH_SHORT).show()
             } else {
                 passengerDetailsViewModel.updateBooking(passengerDetailsDataClass, tripId)
+                val alertDialog = AlertDialog.Builder(requireContext())
+                    .setTitle("Success")
+                    .setMessage("Booked Successfully")
+                    .setPositiveButton("OK", null)
+                    .create()
+
+                alertDialog.show()
                 requireActivity().supportFragmentManager.popBackStack()
                 requireActivity().supportFragmentManager.popBackStack()
                 requireActivity().supportFragmentManager.popBackStack()
