@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
-    private lateinit var bottomNavView : BottomNavigationView
+    private lateinit var bottomNavView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -24,6 +24,11 @@ class MainActivity : AppCompatActivity() {
 
 //        activityMainBinding.sourceToolbar.visibility =
         setContentView(activityMainBinding.root)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -32,9 +37,10 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavView.setupWithNavController(navController)
         supportFragmentManager.addOnBackStackChangedListener { checkUpBottomNavAndTopAppBar() }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun checkUpBottomNavAndTopAppBar(){
+    private fun checkUpBottomNavAndTopAppBar() {
         val topFrag = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         if (topFrag is NavHostFragment) {
             bottomNavView.visibility = View.VISIBLE
@@ -43,17 +49,21 @@ class MainActivity : AppCompatActivity() {
         }
         setSupportActionBar(activityMainBinding.sourceToolbar)
 
-        if (topFrag is SourceFragment || topFrag is DestinationFragment){
-            activityMainBinding.sourceToolbar.visibility = View.VISIBLE
-        }
-        else{
+        if (topFrag is NavHostFragment) {
             activityMainBinding.sourceToolbar.visibility = View.GONE
+        } else {
+            activityMainBinding.sourceToolbar.visibility = View.VISIBLE
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return item.onNavDestinationSelected(navController)
+        if (item.itemId == android.R.id.home) {
+            supportFragmentManager.popBackStack()
+        } else {
+            val navController = findNavController(R.id.nav_host_fragment)
+            item.onNavDestinationSelected(navController)
+        }
+        return true
     }
 
 }

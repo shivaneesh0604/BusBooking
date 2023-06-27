@@ -23,6 +23,7 @@
     <string name="boarding_points_you_prefer">BOARDING POINTS YOU PREFER</string>
     <string name="tripLocationArea">tripLocationArea</string>
     <string name="app_top_bar_search">App Top Bar Search</string>
+    <string name="app_top_bar_back">App Top Bar back</string>
     <string name="search">Search</string>
     <string name="back">Back</string>
     <string name="Account">Account</string>

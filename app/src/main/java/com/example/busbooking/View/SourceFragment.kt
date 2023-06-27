@@ -69,7 +69,6 @@ class SourceFragment(private val tripClickListener: TripLocationFragmentRecycler
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.search -> return true
-
                 }
                 return false
             }

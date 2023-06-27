@@ -48,8 +48,6 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
             homeBinding.sourceID.text = homeViewModel.selectedSource
         }
 
-
-
         homeBinding.sourceID.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.nav_host_fragment, SourceFragment(this), "SourceFragment")
