@@ -1,6 +1,5 @@
 package com.example.busbooking.Model.DataLayer
 
-import android.provider.ContactsContract.Data
 import com.example.busbooking.DataClass.*
 import com.example.busbooking.Entity.Ticket
 import com.example.busbooking.Entity.Trip

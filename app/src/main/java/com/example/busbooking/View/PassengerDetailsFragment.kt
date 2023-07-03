@@ -41,7 +41,7 @@ class PassengerDetailsFragment(
 
         binding.bookSeatButton.setOnClickListener {
 
-            var check: Boolean = true
+            var check = true
             for (passengerDetails in passengerDatas) {
                 if (passengerDetails.passengerName.isNotEmpty() && passengerDetails.passengerAge.isNotEmpty() && passengerDetails.gender.isNotEmpty()) {
                     check = true

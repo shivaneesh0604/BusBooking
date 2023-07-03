@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/marginStart">
+        android:layout_marginStart="@dimen/marginStart"
+        android:layout_marginTop="@dimen/marginStart"
+        android:layout_marginEnd="@dimen/marginStart"
+        android:layout_marginBottom="@dimen/marginStart">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,128 +145,62 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/marginStart"
-                        android:orientation="vertical">
+                        android:contentDescription="@string/seaterbeforeclick"
+                        android:drawablePadding="@dimen/marginStart"
+                        android:gravity="center_horizontal"
+                        android:text="@string/available"
+                        app:drawableTopCompat="@drawable/seaterbeforeclick" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/seaterbeforeclick"
-                            android:src="@drawable/seaterbeforeclick" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/available" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/marginStart"
-                        android:orientation="vertical">
+                        android:contentDescription="@string/seaterbooked"
+                        android:drawablePadding="@dimen/marginStart"
+                        android:gravity="center_horizontal"
+                        android:text="@string/booked_seater"
+                        app:drawableTopCompat="@drawable/seaterbooked" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/seaterbooked"
-                            android:src="@drawable/seaterbooked" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/booked_seater" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/marginStart"
-                        android:orientation="vertical">
+                        android:contentDescription="@string/seaterclicked"
+                        android:drawablePadding="@dimen/marginStart"
+                        android:gravity="center_horizontal"
+                        android:text="@string/clicked_seater"
+                        app:drawableTopCompat="@drawable/seaterclicked" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/seaterclicked"
-                            android:src="@drawable/seaterclicked" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/clicked_seater" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/marginStart"
-                        android:orientation="vertical">
+                        android:contentDescription="@string/sleeperbeforeclick"
+                        android:drawablePadding="@dimen/marginStart"
+                        android:gravity="center_horizontal"
+                        android:text="@string/available_sleeper"
+                        app:drawableTopCompat="@drawable/sleeperbeforeclick" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/sleeperbeforeclick"
-                            android:src="@drawable/sleeperbeforeclick" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/available_sleeper" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/marginStart"
-                        android:orientation="vertical">
+                        android:contentDescription="@string/sleeperbooked"
+                        android:drawablePadding="@dimen/marginStart"
+                        android:gravity="center_horizontal"
+                        android:text="@string/booked_sleeper"
+                        app:drawableTopCompat="@drawable/sleeperbooked" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/sleeperbooked"
-                            android:src="@drawable/sleeperbooked" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/booked_sleeper" />
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/marginStart"
-                        android:orientation="vertical">
+                        android:contentDescription="@string/sleeperclicked"
+                        android:drawablePadding="@dimen/marginStart"
+                        android:gravity="center_horizontal"
+                        android:text="@string/clicked_sleeper"
+                        app:drawableTopCompat="@drawable/sleeperclicked" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/sleeperclicked"
-                            android:src="@drawable/sleeperclicked" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/clicked_sleeper" />
-                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
 

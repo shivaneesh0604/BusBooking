@@ -2,7 +2,6 @@ package com.example.busbooking.Model.Database
 
 import com.example.busbooking.DataClass.PassengerDetailsDataClass
 import com.example.busbooking.DataClass.SelectedRoutesAndDate
-import com.example.busbooking.DataClass.TripDetails
 import com.example.busbooking.Entity.*
 import com.example.busbooking.Enums.BookingStatus
 
@@ -13,7 +12,7 @@ internal object Database {
 
     private val seats: List<Seat> = DataProvider.addSeat()
 
-    private val drivers: List<Driver> = DataProvider.addDrivers()
+//    private val drivers: List<Driver> = DataProvider.addDrivers()
 
     private val passenger: Passenger = Passenger(1, "Shivaneesh", 1234567890, 22)
 
@@ -70,7 +69,7 @@ internal object Database {
     fun updateBooking(passengerDetailsDataClass: List<PassengerDetailsDataClass>, tripId: Int):Boolean {
         val trip = getTrip(tripId)
         for (passengerDetails in passengerDetailsDataClass) {
-            val ticket: Ticket = Ticket(
+            val ticket = Ticket(
                 ticketID,
                 trip!!.tripID,
                 passengerDetails.seatNumber,
