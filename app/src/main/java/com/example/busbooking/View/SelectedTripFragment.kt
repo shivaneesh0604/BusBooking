@@ -292,6 +292,9 @@ class SelectedTripFragment(private val selectedTripID: Int, private val seatingT
             for ((i, seatNumber) in selectedSeats.withIndex()) {
                 passengerDetailsDataClass.add(PassengerDetailsDataClass("", "", "", seatNumber))
             }
+
+            //todo : here i have passed the object itself to another fragment as parameter.
+
             requireActivity().supportFragmentManager.beginTransaction().replace(
                 R.id.nav_host_fragment,
                 PassengerDetailsFragment(passengerDetailsDataClass, selectedTripID),

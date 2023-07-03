@@ -42,7 +42,7 @@
     <string name="boardingArea">Chennai - </string>
     <string name="droppingArea">Madurai</string>
     <string name="steeringImage">steeringImage</string>
-    <string name="know_about_seat_types">Know About Seat Types</string>
+    <string name="drag_to_know_about_seat_types">Drag To Know About Seat Types</string>
     <string name="seaterbeforeclick">seaterbeforeclick</string>
     <string name="seaterbooked">seaterbooked</string>
     <string name="seaterclicked">seaterclicked</string>

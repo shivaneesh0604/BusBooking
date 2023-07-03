@@ -43,7 +43,7 @@ class SelectedBusRouteFragment : Fragment(), SelectedBusRouteFragmentRecyclerVie
         val itemsAdapter =
             SelectedBusRouteFragmentRecyclerView(
                 requireContext(),
-                selectedBusRouteViewModel.getSelectedBusRouteDataClass(), this
+                selectedBusRouteViewModel.getSelectedBusRoutes(), this
             )
 
         selectedBusRouteBinding.selectedBusRouteRecyclerView.adapter = itemsAdapter

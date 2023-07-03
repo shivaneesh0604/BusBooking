@@ -6,8 +6,8 @@ import com.example.busbooking.Model.DataLayer.DataRetriever
 
 class PassengerDetailsViewModel:ViewModel() {
 
-    fun updateBooking( passengerDetailsDataClass: List<PassengerDetailsDataClass>,  tripId:Int){
-        DataRetriever().updateBooking(passengerDetailsDataClass,tripId)
+    fun updateBooking( passengerDetailsDataClass: List<PassengerDetailsDataClass>,  tripId:Int):Boolean{
+        return DataRetriever().updateBooking(passengerDetailsDataClass,tripId)
     }
 
 }

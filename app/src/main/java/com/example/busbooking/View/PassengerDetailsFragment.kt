@@ -21,7 +21,7 @@ class PassengerDetailsFragment(
     Fragment() {
     private lateinit var binding: FragmentPassengerDetails2Binding
     private val passengerDetailsViewModel: PassengerDetailsViewModel by viewModels()
-    private var toast:Toast? = null
+    private var toast: Toast? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +32,8 @@ class PassengerDetailsFragment(
         binding.passengerDetailsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
 
-        val itemsAdapter = PassengerDetailsFragmentRecyclerView(requireContext(), passengerDetailsDataClass)
+        val itemsAdapter =
+            PassengerDetailsFragmentRecyclerView(requireContext(), passengerDetailsDataClass)
 
         binding.passengerDetailsRecyclerView.adapter = itemsAdapter
 
@@ -50,22 +51,27 @@ class PassengerDetailsFragment(
                 }
             }
             if (!check) {
-                if (toast!=null){
+                if (toast != null) {
                     toast!!.cancel()
                 }
                 Toast.makeText(requireContext(), "Fill all data's", Toast.LENGTH_SHORT).show()
             } else {
-                passengerDetailsViewModel.updateBooking(passengerDetailsDataClass, tripId)
-                val alertDialog = AlertDialog.Builder(requireContext())
-                    .setTitle("Success")
-                    .setMessage("Booked Successfully")
-                    .setPositiveButton("OK", null)
-                    .create()
+                val ticketConfirmation =
+                    passengerDetailsViewModel.updateBooking(passengerDetailsDataClass, tripId)
 
-                alertDialog.show()
-                requireActivity().supportFragmentManager.popBackStack()
-                requireActivity().supportFragmentManager.popBackStack()
-                requireActivity().supportFragmentManager.popBackStack()
+                if (ticketConfirmation) {
+                    val alertDialog = AlertDialog.Builder(requireContext())
+                        .setTitle("Success")
+                        .setMessage("Booked Successfully")
+                        .setPositiveButton("OK", null)
+                        .create()
+
+                    alertDialog.show()
+                    requireActivity().supportFragmentManager.popBackStack()
+                    requireActivity().supportFragmentManager.popBackStack()
+                    requireActivity().supportFragmentManager.popBackStack()
+
+                }
             }
         }
 

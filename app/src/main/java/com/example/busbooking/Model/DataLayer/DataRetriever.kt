@@ -74,8 +74,8 @@ class DataRetriever {
         return Database.getSeatPrice(tripId)
     }
 
-    fun updateBooking(passengerDetailsDataClass: List<PassengerDetailsDataClass>, tripId: Int) {
-        Database.updateBooking(passengerDetailsDataClass, tripId)
+    fun updateBooking(passengerDetailsDataClass: List<PassengerDetailsDataClass>, tripId: Int):Boolean {
+        return Database.updateBooking(passengerDetailsDataClass, tripId)
     }
 
     fun getBookings(): MutableList<BookingsDataClass> {

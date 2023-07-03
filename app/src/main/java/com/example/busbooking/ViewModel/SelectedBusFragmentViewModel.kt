@@ -11,7 +11,7 @@ class SelectedBusFragmentViewModel : ViewModel() {
 
     lateinit var selectedRoutesAndDate: SelectedRoutesAndDate
 
-    fun getSelectedBusRouteDataClass(): List<SelectedBusRouteDataClass> {
+    fun getSelectedBusRoutes(): List<SelectedBusRouteDataClass> {
         selectedBusRouteDataClass =
             DataRetriever().retrieveSelectedBusData(selectedRoutesAndDate)
         return selectedBusRouteDataClass

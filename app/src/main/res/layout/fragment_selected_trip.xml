@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/marginStart"
                 android:gravity="center_horizontal"
-                android:text="@string/know_about_seat_types"
+                android:text="@string/drag_to_know_about_seat_types"
                 android:textAlignment="gravity" />
 
             <HorizontalScrollView

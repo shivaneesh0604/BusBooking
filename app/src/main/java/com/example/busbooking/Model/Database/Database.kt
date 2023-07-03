@@ -67,7 +67,7 @@ internal object Database {
         return trips.find { it.tripID == tripId }
     }
 
-    fun updateBooking(passengerDetailsDataClass: List<PassengerDetailsDataClass>, tripId: Int) {
+    fun updateBooking(passengerDetailsDataClass: List<PassengerDetailsDataClass>, tripId: Int):Boolean {
         val trip = getTrip(tripId)
         for (passengerDetails in passengerDetailsDataClass) {
             val ticket: Ticket = Ticket(
@@ -89,6 +89,8 @@ internal object Database {
         }
 
         ticketID++
+
+        return true
     }
 
     fun getBookings():List<Ticket>{
