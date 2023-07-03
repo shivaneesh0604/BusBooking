@@ -226,6 +226,18 @@ object DataProvider {
                 perSeatPrice = 700,
                 boardingTime = "20:50",
                 droppingTime = "05:30"
+            ),
+            Trip(
+                tripID = 5,
+                busID = 3,
+                driverID = 1,
+                boardingArea = Areas.Nagercoil,
+                droppingArea = Areas.Kochin,
+                travelDateFrom = currentDay,
+                travelDateTo = nextDayString,
+                perSeatPrice = 600,
+                boardingTime = "18:50",
+                droppingTime = "03:30"
             )
         )
     }
