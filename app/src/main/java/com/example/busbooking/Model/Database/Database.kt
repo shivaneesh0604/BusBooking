@@ -12,7 +12,7 @@ internal object Database {
 
     private val seats: List<Seat> = DataProvider.addSeat()
 
-//    private val drivers: List<Driver> = DataProvider.addDrivers()
+    private val drivers: List<Driver> = DataProvider.addDrivers()
 
     private val passenger: Passenger = Passenger(1, "Shivaneesh", 1234567890, 22)
 
