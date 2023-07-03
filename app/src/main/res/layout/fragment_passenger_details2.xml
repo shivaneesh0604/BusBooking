@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/grey"
     android:orientation="vertical"
-    tools:context=".View.PassengerDetailsFragment">
+    tools:context=".views.PassengerDetailsFragment">
 
     <TextView
         android:id="@+id/passengerInfoTV"
@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/bookseats"
+        android:textColor="@color/white"
         android:background="@color/red"/>
 
 </RelativeLayout>

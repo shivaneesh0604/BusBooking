@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.busbooking.View.HomeFragment"
+        android:name="com.example.busbooking.views.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/bookingsFragment"
-        android:name="com.example.busbooking.View.BookingsFragment"
+        android:name="com.example.busbooking.views.BookingsFragment"
         android:label="Bookings"
         tools:layout="@layout/fragment_bookings" />
 
     <fragment
         android:id="@+id/helpFragment"
-        android:name="com.example.busbooking.View.HelpFragment"
+        android:name="com.example.busbooking.views.HelpFragment"
         android:label="Help"
         tools:layout="@layout/fragment_help" />
 
     <fragment
         android:id="@+id/accountsFragment"
-        android:name="com.example.busbooking.View.AccountFragment"
+        android:name="com.example.busbooking.views.AccountFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account" />
 

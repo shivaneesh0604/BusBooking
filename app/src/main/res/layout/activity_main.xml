@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/mainActivity"
-    tools:context=".View.MainActivity">
+    tools:context=".views.MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/sourceToolbar"
