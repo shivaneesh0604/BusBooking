@@ -1,11 +1,14 @@
 package com.example.busbooking.views
 
 import android.animation.ObjectAnimator
+import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -23,18 +26,19 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
 
     private lateinit var homeBinding: FragmentHomeBinding
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private val calendar: Calendar = Calendar.getInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        val calendarToday = Calendar.getInstance()
         val dateFormatToday = SimpleDateFormat("E, dd MMM", Locale.getDefault())
 
 
-        homeBinding.dateID.text = dateFormatToday.format(calendarToday.time)
-        homeViewModel.selectedDay = dateFormatToday.format(calendarToday.time)
+        homeBinding.dateID.text = dateFormatToday.format(calendar.time)
+        homeViewModel.selectedDay = dateFormatToday.format(calendar.time)
 
         if (homeViewModel.selectedDay != null) {
             homeBinding.dateID.text = homeViewModel.selectedDay
@@ -61,11 +65,7 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
         }
 
         homeBinding.dateID.setOnClickListener {
-            val datePickerBottomSheet = DatePickerBottomSheet(this)
-            datePickerBottomSheet.show(
-                requireActivity().supportFragmentManager,
-                "datePickerBottomSheet"
-            )
+            showDatePickerDialog()
         }
 
         homeBinding.todayBtn.setOnClickListener {
@@ -170,5 +170,45 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
             homeBinding.destID.text = selectedTripLocation
             homeViewModel.selectedDestination = selectedTripLocation
         }
+    }
+
+    private fun showDatePickerDialog() {
+        // Get the current year, month, and day from the Calendar instance
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        // Set the range for the date picker to 5 days from today
+        val maxDateCalendar = Calendar.getInstance()
+        maxDateCalendar.add(Calendar.DAY_OF_MONTH, 5)
+
+
+        // Create a date picker dialog and set the initial date to the current date
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            DatePickerDialog.OnDateSetListener { view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
+                // Handle the selected date
+                // Here, you can perform any actions with the selected date
+                // For example, update a TextView with the selected date
+                val calendar = Calendar.getInstance()
+                calendar.set(selectedYear, selectedMonth, selectedDay)
+                val dateFormat = SimpleDateFormat("E, dd MMM", Locale.getDefault())
+
+                homeBinding.dateID.text = dateFormat.format(calendar.time)
+                this.calendar.set(selectedYear, selectedMonth, selectedDay)
+                homeViewModel.selectedDay = dateFormat.format(calendar.time)
+                Log.e("datecheck",""+homeViewModel.selectedDay)
+            },
+            currentYear,
+            currentMonth,
+            currentDay
+        )
+
+        // Set the maximum date allowed in the date picker
+        datePickerDialog.datePicker.maxDate = maxDateCalendar.timeInMillis
+        datePickerDialog.datePicker.minDate = calendar.timeInMillis
+
+        // Show the date picker dialog
+        datePickerDialog.show()
     }
 }
