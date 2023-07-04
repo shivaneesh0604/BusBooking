@@ -48,7 +48,7 @@
                     <LinearLayout
                         android:id="@+id/ratingsLinearLayout"
                         android:layout_width="50dp"
-                        android:layout_height="25dp"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:background="@color/green"
                         android:gravity="end">
@@ -146,6 +146,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:layout_margin="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/seaterbeforeclick"
@@ -155,6 +156,7 @@
                         app:drawableTopCompat="@drawable/seaterbeforeclick" />
 
                     <TextView
+                        android:layout_margin="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/seaterbooked"
@@ -163,7 +165,9 @@
                         android:text="@string/booked_seater"
                         app:drawableTopCompat="@drawable/seaterbooked" />
 
+
                     <TextView
+                        android:layout_margin="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/seaterclicked"
@@ -172,8 +176,8 @@
                         android:text="@string/clicked_seater"
                         app:drawableTopCompat="@drawable/seaterclicked" />
 
-
                     <TextView
+                        android:layout_margin="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/sleeperbeforeclick"
@@ -182,8 +186,8 @@
                         android:text="@string/available_sleeper"
                         app:drawableTopCompat="@drawable/sleeperbeforeclick" />
 
-
                     <TextView
+                        android:layout_margin="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/sleeperbooked"
@@ -193,6 +197,7 @@
                         app:drawableTopCompat="@drawable/sleeperbooked" />
 
                     <TextView
+                        android:layout_margin="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/sleeperclicked"

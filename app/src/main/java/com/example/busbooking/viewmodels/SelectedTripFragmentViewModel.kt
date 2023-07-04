@@ -10,23 +10,24 @@ class SelectedTripFragmentViewModel:ViewModel() {
     private var seatPrice :Int? = null
     private lateinit var tripDetails :TripDetails
     private var seatsList = listOf<Int>()
+    private val dataRetriever = DataRetriever()
 
     fun getBookedSeats(tripId:Int):List<Int>{
-        bookedSeats = DataRetriever().retrieveBookedSeats(tripId)
+        bookedSeats = dataRetriever.retrieveBookedSeats(tripId)
         return bookedSeats
     }
 
     fun getTripDetails(tripId: Int):TripDetails{
-        tripDetails = DataRetriever().getTripDetails(tripId)
+        tripDetails = dataRetriever.getTripDetails(tripId)
         return tripDetails
     }
     fun getSeatPrice(tripId: Int):Int?{
-        seatPrice = DataRetriever().retrieveSeatPrice(tripId)
+        seatPrice = dataRetriever.retrieveSeatPrice(tripId)
         return seatPrice
     }
 
     fun getSeatsList(tripId: Int):List<Int>{
-        seatsList = DataRetriever().retrieveSeats(tripId)
+        seatsList = dataRetriever.retrieveSeats(tripId)
         return seatsList
     }
 }

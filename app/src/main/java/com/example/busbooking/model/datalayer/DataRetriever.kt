@@ -7,7 +7,7 @@ import com.example.busbooking.model.database.Database
 
 class DataRetriever {
 
-    fun retrieveSelectedBusData(selectedRoutesAndDate: SelectedRoutesAndDate): MutableList<SelectedBusRouteDataClass> {
+    fun retrieveSelectedBusData(selectedRoutesAndDate: SelectedRoutesAndDate): List<SelectedBusRouteDataClass> {
         val selectedBusData: MutableList<SelectedBusRouteDataClass> = mutableListOf()
         val trips: List<Trip> =
             Database.getTripForSelectedRouteAndDate(selectedRoutesAndDate)
@@ -28,7 +28,7 @@ class DataRetriever {
             )
         }
 
-        return selectedBusData
+        return selectedBusData.toList()
 
     }
 

@@ -7,7 +7,7 @@ import com.example.busbooking.model.datalayer.DataRetriever
 
 class SelectedBusFragmentViewModel : ViewModel() {
 
-    private var selectedBusRouteDataClass: MutableList<SelectedBusRouteDataClass> = mutableListOf()
+    private var selectedBusRouteDataClass: List<SelectedBusRouteDataClass> = listOf()
 
     lateinit var selectedRoutesAndDate: SelectedRoutesAndDate
 
