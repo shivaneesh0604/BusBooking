@@ -3,7 +3,6 @@ package com.example.busbooking.views
 import android.annotation.SuppressLint
 import android.app.ActionBar.LayoutParams
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +49,7 @@ class SelectedTripFragment(private val selectedTripID: Int, private val seatingT
 
         val linearLayoutParent = LinearLayout(requireContext())
         linearLayoutParent.layoutParams = LinearLayout.LayoutParams(
-            LayoutParams.MATCH_PARENT,
+            LayoutParams.WRAP_CONTENT,
             LayoutParams.MATCH_PARENT
         )
 
@@ -83,95 +82,92 @@ class SelectedTripFragment(private val selectedTripID: Int, private val seatingT
                     20
                 )
                 for (j in 1..3) {
-                    val button = Button(requireContext())
-                    button.layoutParams = LinearLayout.LayoutParams(200, 150)
+                    if (seatsListCount < seatsList.size) {
+                        val button = Button(requireContext())
+                        button.layoutParams = LinearLayout.LayoutParams(200, 150)
+                        button.tag = seatsList[seatsListCount]
+                        ++seatsListCount
+                        if (j == 1) {
+                            (button.layoutParams as LinearLayout.LayoutParams).setMargins(
+                                0,
+                                0,
+                                50,
+                                0
+                            )
+                        }
+                        var clicked = false
+                        if (bookedSeats.contains(button.tag)) {
+                            button.setBackgroundResource(R.drawable.sleeperbooked)
+                            button.isClickable = false
+                        } else {
+                            button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                            button.isClickable = true
+                            button.setOnClickListener {
+                                if (!clicked) {
+                                    if (noOfSeatsSelected > 5) {
+                                        if (toast != null) {
+                                            toast!!.cancel()
+                                        }
+                                        toast = Toast.makeText(
+                                            requireContext(),
+                                            "Maximum Number Of seats at one transaction can be only 6",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                        toast!!.show()
+                                    } else {
+                                        button.setBackgroundResource(R.drawable.sleeperclicked)
+                                        binding.seatsSelectedLayout.visibility = View.VISIBLE
+                                        ++noOfSeatsSelected
+                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                        binding.totalPrice.text =
+                                            (noOfSeatsSelected * perSeatPrice!!).toString()
+                                        selectedSeats.add(button.tag as Int)
+                                        var seatNumberString = ""
+                                        for (seatNumber in selectedSeats) {
+                                            seatNumberString += if (selectedSeats.size > 1) {
+                                                if (seatNumber == selectedSeats.last()) {
+                                                    seatNumber.toString()
+                                                } else {
+                                                    "$seatNumber ,"
+                                                }
+                                            } else {
+                                                seatNumber.toString()
+                                            }
+                                        }
+                                        binding.seatsNumbers.text = seatNumberString
 
-                    Log.e(
-                        "onclick",
-                        "onclick ${seatsList[seatsListCount]} and total size is ${seatsList.size}"
-                    )
-                    button.tag = seatsList[seatsListCount]
-                    ++seatsListCount
-                    if (j == 1) {
-                        (button.layoutParams as LinearLayout.LayoutParams).setMargins(
-                            0,
-                            0,
-                            50,
-                            0
-                        )
-                    }
-                    var clicked = false
-                    if (bookedSeats.contains(button.tag)) {
-                        button.setBackgroundResource(R.drawable.sleeperbooked)
-                        button.isClickable = false
-                    } else {
-                        button.setBackgroundResource(R.drawable.sleeperbeforeclick)
-                        button.isClickable = true
-                        button.setOnClickListener {
-                            if (!clicked) {
-                                if (noOfSeatsSelected > 5) {
-                                    if (toast != null) {
-                                        toast!!.cancel()
+                                        clicked = true
                                     }
-                                    toast = Toast.makeText(
-                                        requireContext(),
-                                        "Maximum Number Of seats at one transaction can be only 6",
-                                        Toast.LENGTH_SHORT
-                                    )
-                                    toast!!.show()
                                 } else {
-                                    button.setBackgroundResource(R.drawable.sleeperclicked)
-                                    binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                    ++noOfSeatsSelected
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                    button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                                    --noOfSeatsSelected
+                                    selectedSeats.remove(button.tag as Int)
                                     binding.totalPrice.text =
                                         (noOfSeatsSelected * perSeatPrice!!).toString()
-                                    selectedSeats.add(button.tag as Int)
-                                    var seatNumberString = ""
-                                    for (seatNumber in selectedSeats) {
-                                        seatNumberString += if (selectedSeats.size > 1) {
-                                            if (seatNumber == selectedSeats.last()) {
-                                                seatNumber.toString()
+                                    if (noOfSeatsSelected == 0) {
+                                        binding.seatsSelectedLayout.visibility = View.GONE
+                                    } else {
+                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
+                                        var seatNumbersString = ""
+                                        for (seatNumber in selectedSeats) {
+                                            seatNumbersString += if (selectedSeats.size > 1) {
+                                                if (seatNumber == selectedSeats.last()) {
+                                                    seatNumber.toString()
+                                                } else {
+                                                    "$seatNumber ,"
+                                                }
                                             } else {
-                                                "$seatNumber ,"
-                                            }
-                                        } else {
-                                            seatNumber.toString()
-                                        }
-                                    }
-                                    binding.seatsNumbers.text = seatNumberString
-
-                                    clicked = true
-                                }
-                            } else {
-                                button.setBackgroundResource(R.drawable.sleeperbeforeclick)
-                                --noOfSeatsSelected
-                                selectedSeats.remove(button.tag as Int)
-                                binding.totalPrice.text =
-                                    (noOfSeatsSelected * perSeatPrice!!).toString()
-                                if (noOfSeatsSelected == 0) {
-                                    binding.seatsSelectedLayout.visibility = View.GONE
-                                } else {
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
-                                    var seatNumbersString = ""
-                                    for (seatNumber in selectedSeats) {
-                                        seatNumbersString += if (selectedSeats.size > 1) {
-                                            if (seatNumber == selectedSeats.last()) {
                                                 seatNumber.toString()
-                                            } else {
-                                                "$seatNumber ,"
                                             }
-                                        } else {
-                                            seatNumber.toString()
                                         }
+                                        binding.seatsNumbers.text = seatNumbersString
                                     }
-                                    binding.seatsNumbers.text = seatNumbersString
+                                    clicked = false
                                 }
-                                clicked = false
                             }
                         }
+                        linearLayoutChild.addView(button)
                     }
-                    linearLayoutChild.addView(button)
                 }
                 linearLayoutParent.addView(linearLayoutChild)
             }
@@ -190,94 +186,90 @@ class SelectedTripFragment(private val selectedTripID: Int, private val seatingT
                     20
                 )
                 for (j in 1..4) {
+                    if (seatsListCount < seatsList.size) {
+                        val button = Button(requireContext())
+                        button.layoutParams = LinearLayout.LayoutParams(150, 150)
+                        button.tag = seatsList[seatsListCount]
+                        ++seatsListCount
+                        if (j == 2) {
+                            (button.layoutParams as LinearLayout.LayoutParams).setMargins(
+                                0,
+                                0,
+                                50,
+                                0
+                            )
+                        }
+                        var clicked = false
 
-                    val button = Button(requireContext())
-                    button.layoutParams = LinearLayout.LayoutParams(150, 150)
+                        if (bookedSeats.contains(button.tag)) {
+                            button.setBackgroundResource(R.drawable.seaterbooked)
+                            button.isClickable = false
+                        } else {
+                            button.setBackgroundResource(R.drawable.seaterbeforeclick)
+                            button.isClickable = true
 
-                    Log.e(
-                        "onclick",
-                        "onclick ${seatsList[seatsListCount]} and total size is ${seatsList.size}"
-                    )
-                    button.tag = seatsList[seatsListCount]
-                    ++seatsListCount
-                    if (j == 2) {
-                        (button.layoutParams as LinearLayout.LayoutParams).setMargins(
-                            0,
-                            0,
-                            50,
-                            0
-                        )
-                    }
-                    var clicked = false
+                            button.setOnClickListener {
+                                if (!clicked) {
+                                    if (noOfSeatsSelected > 5) {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Maximum Number Of seats at one transaction can be only 6",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else {
+                                        button.setBackgroundResource(R.drawable.seaterclicked)
+                                        binding.seatsSelectedLayout.visibility = View.VISIBLE
+                                        ++noOfSeatsSelected
+                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                        binding.totalPrice.text =
+                                            (noOfSeatsSelected * perSeatPrice!!).toString()
+                                        selectedSeats.add(button.tag as Int)
+                                        var seatNumberString = ""
+                                        for (seatNumber in selectedSeats) {
+                                            seatNumberString += if (selectedSeats.size > 1) {
+                                                if (seatNumber == selectedSeats.last()) {
+                                                    seatNumber.toString()
+                                                } else {
+                                                    "$seatNumber ,"
+                                                }
+                                            } else {
+                                                seatNumber.toString()
+                                            }
+                                        }
+                                        binding.seatsNumbers.text = seatNumberString
 
-                    if (bookedSeats.contains(button.tag)) {
-                        button.setBackgroundResource(R.drawable.seaterbooked)
-                        button.isClickable = false
-                    } else {
-                        button.setBackgroundResource(R.drawable.seaterbeforeclick)
-                        button.isClickable = true
-
-                        button.setOnClickListener {
-                            if (!clicked) {
-                                if (noOfSeatsSelected > 5) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Maximum Number Of seats at one transaction can be only 6",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                        clicked = true
+                                    }
                                 } else {
-                                    button.setBackgroundResource(R.drawable.seaterclicked)
-                                    binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                    ++noOfSeatsSelected
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                    button.setBackgroundResource(R.drawable.seaterbeforeclick)
+                                    --noOfSeatsSelected
+                                    selectedSeats.remove(button.tag as Int)
                                     binding.totalPrice.text =
                                         (noOfSeatsSelected * perSeatPrice!!).toString()
-                                    selectedSeats.add(button.tag as Int)
-                                    var seatNumberString = ""
-                                    for (seatNumber in selectedSeats) {
-                                        seatNumberString += if (selectedSeats.size > 1) {
-                                            if (seatNumber == selectedSeats.last()) {
-                                                seatNumber.toString()
+                                    if (noOfSeatsSelected == 0) {
+                                        binding.seatsSelectedLayout.visibility = View.GONE
+                                    } else {
+                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
+                                        var seatNumbersString = ""
+                                        for (seatNumber in selectedSeats) {
+                                            seatNumbersString += if (selectedSeats.size > 1) {
+                                                if (seatNumber == selectedSeats.last()) {
+                                                    seatNumber.toString()
+                                                } else {
+                                                    "$seatNumber ,"
+                                                }
                                             } else {
-                                                "$seatNumber ,"
-                                            }
-                                        } else {
-                                            seatNumber.toString()
-                                        }
-                                    }
-                                    binding.seatsNumbers.text = seatNumberString
-
-                                    clicked = true
-                                }
-                            } else {
-                                button.setBackgroundResource(R.drawable.seaterbeforeclick)
-                                --noOfSeatsSelected
-                                selectedSeats.remove(button.tag as Int)
-                                binding.totalPrice.text =
-                                    (noOfSeatsSelected * perSeatPrice!!).toString()
-                                if (noOfSeatsSelected == 0) {
-                                    binding.seatsSelectedLayout.visibility = View.GONE
-                                } else {
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
-                                    var seatNumbersString = ""
-                                    for (seatNumber in selectedSeats) {
-                                        seatNumbersString += if (selectedSeats.size > 1) {
-                                            if (seatNumber == selectedSeats.last()) {
                                                 seatNumber.toString()
-                                            } else {
-                                                "$seatNumber ,"
                                             }
-                                        } else {
-                                            seatNumber.toString()
                                         }
+                                        binding.seatsNumbers.text = seatNumbersString
                                     }
-                                    binding.seatsNumbers.text = seatNumbersString
+                                    clicked = false
                                 }
-                                clicked = false
                             }
                         }
+                        linearLayoutChild.addView(button)
                     }
-                    linearLayoutChild.addView(button)
                 }
                 linearLayoutParent.addView(linearLayoutChild)
             }

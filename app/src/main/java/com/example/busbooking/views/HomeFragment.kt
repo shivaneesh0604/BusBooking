@@ -118,7 +118,11 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
                     )
                     selectedBusRouteFragment.arguments = selectedBusRoutes
                     requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment,selectedBusRouteFragment, "SelectedBusRoute")
+                        .replace(
+                            R.id.nav_host_fragment,
+                            selectedBusRouteFragment,
+                            "SelectedBusRoute"
+                        )
                         .addToBackStack(null).commit()
                 }
                 TripLocation.Source -> {
@@ -144,7 +148,15 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
             }
         }
 
+        onResume()
+
         return homeBinding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.bookingsFrameLayout, BookingsFragment()).addToBackStack(null).commit()
     }
 
     private fun checkNullValidationForRoutes(): TripLocation? {
@@ -194,7 +206,7 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
                 homeBinding.dateID.text = dateFormat.format(calendar.time)
                 this.calendar.set(selectedYear, selectedMonth, selectedDay)
                 homeViewModel.selectedDay = dateFormat.format(calendar.time)
-                Log.e("datecheck",""+homeViewModel.selectedDay)
+                Log.e("datecheck", "" + homeViewModel.selectedDay)
             },
             currentYear,
             currentMonth,

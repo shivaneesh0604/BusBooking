@@ -34,8 +34,7 @@ object DataProvider {
             Seat(20, 1, 5, 4),
             Seat(21, 1, 6, 1),
             Seat(22, 1, 6, 2),
-            Seat(23, 1, 6, 3),
-            Seat(24, 1, 6, 4),//semi sleeper
+            Seat(23, 1, 6, 3),//semi sleeper
 
             Seat(1, 3, 1, 1),
             Seat(2, 3, 1, 2),
@@ -59,8 +58,7 @@ object DataProvider {
             Seat(20, 3, 5, 4),
             Seat(21, 3, 6, 1),
             Seat(22, 3, 6, 2),
-            Seat(23, 3, 6, 3),
-            Seat(24, 3, 6, 4),//semi sleeper(24seats)
+            Seat(23, 3, 6, 3),//semi sleeper(24seats)
 
             Seat(1, 2, 1, 1),
             Seat(2, 2, 1, 2),
