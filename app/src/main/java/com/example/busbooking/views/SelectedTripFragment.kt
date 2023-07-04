@@ -12,7 +12,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.busbooking.dataclass.PassengerDetailsDataClass
+import com.example.busbooking.dataclass.PassengerDetails
 import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
 import com.example.busbooking.viewmodels.SelectedTripFragmentViewModel
@@ -287,17 +287,17 @@ class SelectedTripFragment(private val selectedTripID: Int, private val seatingT
 
         // CLICK SUBMIT BUTTON
         binding.submitButton.setOnClickListener {
-            val passengerDetailsDataClass: MutableList<PassengerDetailsDataClass> =
+            val passengerDetails: MutableList<PassengerDetails> =
                 mutableListOf()
             for ((i, seatNumber) in selectedSeats.withIndex()) {
-                passengerDetailsDataClass.add(PassengerDetailsDataClass("", "", "", seatNumber))
+                passengerDetails.add(PassengerDetails("", "", "", seatNumber))
             }
 
             //todo : here i have passed the object itself to another fragment as parameter.
 
             requireActivity().supportFragmentManager.beginTransaction().replace(
                 R.id.nav_host_fragment,
-                PassengerDetailsFragment(passengerDetailsDataClass, selectedTripID),
+                PassengerDetailsFragment(passengerDetails, selectedTripID),
                 "Passenger Details Frag"
             ).addToBackStack(null).commit()
 //                requireActivity().supportFragmentManager.beginTransaction().replace(

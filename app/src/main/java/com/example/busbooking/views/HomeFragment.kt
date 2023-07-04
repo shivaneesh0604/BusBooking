@@ -187,9 +187,6 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             DatePickerDialog.OnDateSetListener { view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
-                // Handle the selected date
-                // Here, you can perform any actions with the selected date
-                // For example, update a TextView with the selected date
                 val calendar = Calendar.getInstance()
                 calendar.set(selectedYear, selectedMonth, selectedDay)
                 val dateFormat = SimpleDateFormat("E, dd MMM", Locale.getDefault())

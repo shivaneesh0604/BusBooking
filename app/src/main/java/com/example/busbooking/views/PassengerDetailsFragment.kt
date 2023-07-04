@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.busbooking.dataclass.PassengerDetailsDataClass
+import com.example.busbooking.dataclass.PassengerDetails
 import com.example.busbooking.recyclerviews.PassengerDetailsFragmentRecyclerView
 import com.example.busbooking.viewmodels.PassengerDetailsViewModel
 import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
 
 class PassengerDetailsFragment(
-    private val passengerDetailsDataClass: List<PassengerDetailsDataClass>,
+    private val passengerDetails: List<PassengerDetails>,
     private val tripId: Int
 ) :
     Fragment() {
@@ -33,7 +33,7 @@ class PassengerDetailsFragment(
             LinearLayoutManager(requireContext())
 
         val itemsAdapter =
-            PassengerDetailsFragmentRecyclerView(requireContext(), passengerDetailsDataClass)
+            PassengerDetailsFragmentRecyclerView(requireContext(), passengerDetails)
 
         binding.passengerDetailsRecyclerView.adapter = itemsAdapter
 
@@ -57,7 +57,7 @@ class PassengerDetailsFragment(
                 Toast.makeText(requireContext(), "Fill all data's", Toast.LENGTH_SHORT).show()
             } else {
                 val ticketConfirmation =
-                    passengerDetailsViewModel.updateBooking(passengerDetailsDataClass, tripId)
+                    passengerDetailsViewModel.updateBooking(passengerDetails, tripId)
 
                 if (ticketConfirmation) {
                     val alertDialog = AlertDialog.Builder(requireContext())

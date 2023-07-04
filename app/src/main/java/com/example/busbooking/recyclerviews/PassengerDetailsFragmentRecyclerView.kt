@@ -10,17 +10,17 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busbooking.dataclass.PassengerDetailsDataClass
+import com.example.busbooking.dataclass.PassengerDetails
 import com.example.busbooking.R
 import com.google.android.material.textfield.TextInputEditText
 
 class PassengerDetailsFragmentRecyclerView(
     private val context: Context,
-    private val passengerDetails: List<PassengerDetailsDataClass>
+    private val passengerDetails: List<PassengerDetails>
 ) : RecyclerView.Adapter<PassengerDetailsFragmentRecyclerView.PassengerDetailsViewHolder>() {
 
     inner class PassengerDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindData(currentItem: PassengerDetailsDataClass) {
+        fun bindData(currentItem: PassengerDetails) {
             val editableTextPassengerName =
                 Editable.Factory.getInstance().newEditable(currentItem.passengerName)
 
@@ -109,7 +109,7 @@ class PassengerDetailsFragmentRecyclerView(
         holder.bindData(currentItem)
     }
 
-    fun getPassengerDetails():List<PassengerDetailsDataClass>{
+    fun getPassengerDetails():List<PassengerDetails>{
         return passengerDetails
     }
 }

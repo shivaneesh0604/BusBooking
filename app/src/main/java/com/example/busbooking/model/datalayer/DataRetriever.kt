@@ -7,15 +7,15 @@ import com.example.busbooking.model.database.Database
 
 class DataRetriever {
 
-    fun retrieveSelectedBusData(selectedRoutesAndDate: SelectedRoutesAndDate): List<SelectedBusRouteDataClass> {
-        val selectedBusData: MutableList<SelectedBusRouteDataClass> = mutableListOf()
+    fun retrieveSelectedBusData(selectedRoutesAndDate: SelectedRoutesAndDate): List<SelectedBusRouteDetails> {
+        val selectedBusData: MutableList<SelectedBusRouteDetails> = mutableListOf()
         val trips: List<Trip> =
             Database.getTripForSelectedRouteAndDate(selectedRoutesAndDate)
         for (trip in trips) {
             val bus = Database.getBus(trip.busID)
             val travels = Database.getTravelsName(bus!!.travelsID)
             selectedBusData.add(
-                SelectedBusRouteDataClass(
+                SelectedBusRouteDetails(
                     trip.tripID,
                     trip.boardingArea.toString(),
                     trip.droppingArea.toString(),
@@ -73,18 +73,18 @@ class DataRetriever {
         return Database.getSeatPrice(tripId)
     }
 
-    fun updateBooking(passengerDetailsDataClass: List<PassengerDetailsDataClass>, tripId: Int):Boolean {
-        return Database.updateBooking(passengerDetailsDataClass, tripId)
+    fun updateBooking(passengerDetails: List<PassengerDetails>, tripId: Int):Boolean {
+        return Database.updateBooking(passengerDetails, tripId)
     }
 
-    fun getBookings(): List<BookingsDataClass> {
+    fun getBookings(): List<BookingsDetails> {
         val bookings = Database.getBookings()
-        val bookingsData = mutableMapOf<Int,BookingsDataClass>()
+        val bookingsData = mutableMapOf<Int,BookingsDetails>()
         for (booking in bookings) {
             val trip = Database.getTrip(booking.tripID)
             val bus = Database.getBus(trip!!.busID)
             val travelsName = Database.getTravelsName(bus!!.travelsID)
-            bookingsData[booking.ticketID] = BookingsDataClass(
+            bookingsData[booking.ticketID] = BookingsDetails(
                 booking.boardingTimeAndDate+"-" + booking.droppingTimeAndDate,
                 booking.boardingPoint.toString()+"-" + booking.droppingPoint.toString(),travelsName!!
             )

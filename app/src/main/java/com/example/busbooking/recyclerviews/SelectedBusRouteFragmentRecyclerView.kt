@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busbooking.dataclass.SelectedBusRouteDataClass
+import com.example.busbooking.dataclass.SelectedBusRouteDetails
 import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
 
 class SelectedBusRouteFragmentRecyclerView(
-    private val context: Context, private val routeTrips: List<SelectedBusRouteDataClass>,private val selectedBusClickListener: SelectedBusClickListener
+    private val context: Context, private val routeTrips: List<SelectedBusRouteDetails>, private val selectedBusClickListener: SelectedBusClickListener
 ) : RecyclerView.Adapter<SelectedBusRouteFragmentRecyclerView.SelectedBusRouteViewHolder>() {
 
     class SelectedBusRouteViewHolder(view: View) : RecyclerView.ViewHolder(view) {

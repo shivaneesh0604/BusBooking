@@ -1,6 +1,6 @@
 package com.example.busbooking.model.database
 
-import com.example.busbooking.dataclass.PassengerDetailsDataClass
+import com.example.busbooking.dataclass.PassengerDetails
 import com.example.busbooking.dataclass.SelectedRoutesAndDate
 import com.example.busbooking.entity.*
 import com.example.busbooking.enums.BookingStatus
@@ -66,7 +66,7 @@ internal object Database {
         return trips.find { it.tripID == tripId }
     }
 
-    fun updateBooking(passengerDetails: List<PassengerDetailsDataClass>, tripId: Int):Boolean {
+    fun updateBooking(passengerDetails: List<PassengerDetails>, tripId: Int):Boolean {
         val trip = getTrip(tripId)
         for (details in passengerDetails) {
             val ticket = Ticket(

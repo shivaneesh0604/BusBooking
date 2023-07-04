@@ -3,7 +3,7 @@ package com.example.busbooking.dataclass
 import com.example.busbooking.enums.BusType
 import com.example.busbooking.enums.SeatingType
 
-data class SelectedBusRouteDataClass(
+data class SelectedBusRouteDetails(
     val tripID:Int,
     val boardingPointTime: String,
     val droppingPointTime: String,
