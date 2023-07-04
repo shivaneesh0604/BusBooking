@@ -67,8 +67,8 @@
             android:layout_width="50dp"
             android:layout_height="25dp"
             android:layout_alignParentEnd="true"
-            android:gravity="end"
-            android:background="@color/green">
+            android:background="@color/green"
+            android:gravity="end">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,15 +76,15 @@
                 android:layout_marginTop="3dp"
                 android:text="@string/star"
                 android:textColor="@color/white"
-                android:textSize="@dimen/textSize"/>
+                android:textSize="@dimen/textSize" />
 
             <Button
                 android:id="@+id/busRating"
                 android:layout_width="35dp"
                 android:layout_height="20dp"
+                android:background="@android:color/transparent"
                 android:text="@string/_4_2"
-                android:textColor="@color/white"
-                android:background="@android:color/transparent"/>
+                android:textColor="@color/white" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -93,11 +93,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ac_sleeper_2_1"
-        android:textStyle="italic"/>
+        android:textStyle="italic" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/black"/>
+        android:background="@color/black" />
 </LinearLayout>
 

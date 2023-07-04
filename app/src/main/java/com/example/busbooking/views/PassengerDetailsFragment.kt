@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.busbooking.dataclass.PassengerDetailsDataClass
 import com.example.busbooking.recyclerviews.PassengerDetailsFragmentRecyclerView
 import com.example.busbooking.viewmodels.PassengerDetailsViewModel
-import com.example.busbooking.databinding.FragmentPassengerDetails2Binding
+import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
 
 class PassengerDetailsFragment(
     private val passengerDetailsDataClass: List<PassengerDetailsDataClass>,
     private val tripId: Int
 ) :
     Fragment() {
-    private lateinit var binding: FragmentPassengerDetails2Binding
+    private lateinit var binding: FragmentPassengerDetailsBinding
     private val passengerDetailsViewModel: PassengerDetailsViewModel by viewModels()
     private var toast: Toast? = null
     override fun onCreateView(
@@ -27,7 +27,7 @@ class PassengerDetailsFragment(
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentPassengerDetails2Binding.inflate(inflater, container, false)
+        binding = FragmentPassengerDetailsBinding.inflate(inflater, container, false)
 
         binding.passengerDetailsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
