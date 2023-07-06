@@ -14,7 +14,7 @@ import com.example.busbooking.recyclerviews.PassengerDetailsFragmentRecyclerView
 import com.example.busbooking.viewmodels.PassengerDetailsViewModel
 import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
 
-class PassengerDetailsFragment() :
+class PassengerDetailsFragment :
     Fragment() {
     private lateinit var binding: FragmentPassengerDetailsBinding
     private val passengerDetailsViewModel: PassengerDetailsViewModel by viewModels()

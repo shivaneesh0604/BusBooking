@@ -476,7 +476,7 @@ class SelectedTripFragment() :
         binding.submitButton.setOnClickListener {
             val passengerDetails: ArrayList<PassengerDetails> =
                 arrayListOf()
-            for ((i, seatNumber) in selectedSeats.withIndex()) {
+            for (seatNumber in selectedSeats) {
                 passengerDetails.add(PassengerDetails("", "", "", seatNumber))
             }
 

@@ -173,7 +173,7 @@ class HomeFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
-            DatePickerDialog.OnDateSetListener { view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
+            { _: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
                 val selectedCalendar = Calendar.getInstance()
                 selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
                 val dateFormat = SimpleDateFormat("E, dd MMM", Locale.getDefault())

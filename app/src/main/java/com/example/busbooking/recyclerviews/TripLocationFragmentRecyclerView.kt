@@ -6,14 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.busbooking.enums.Areas
 import com.example.busbooking.enums.TripLocation
 import com.example.busbooking.R
-import com.example.busbooking.viewmodels.HomeViewModel
-import java.io.Serializable
 
 class TripLocationFragmentRecyclerView(
     private val context: Context,

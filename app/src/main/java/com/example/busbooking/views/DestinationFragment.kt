@@ -1,7 +1,6 @@
 package com.example.busbooking.views
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
@@ -88,7 +87,7 @@ class DestinationFragment() : TripLocationFragmentRecyclerView.TripLocationClick
         val filteredList = mutableListOf<Areas>()
 
         for (item in areasList) {
-            if (item.toString().toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
+            if (item.toString().lowercase(Locale.ROOT).contains(query.lowercase(Locale.ROOT))) {
                 filteredList.add(item)
             }
         }

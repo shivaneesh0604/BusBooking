@@ -16,7 +16,7 @@ import com.example.busbooking.recyclerviews.TripLocationFragmentRecyclerView
 import com.example.busbooking.databinding.FragmentSourceBinding
 import java.util.*
 
-class SourceFragment() : TripLocationFragmentRecyclerView.TripLocationClickListener,
+class SourceFragment : TripLocationFragmentRecyclerView.TripLocationClickListener,
     Fragment() {
 
     private lateinit var sourceBinding: FragmentSourceBinding

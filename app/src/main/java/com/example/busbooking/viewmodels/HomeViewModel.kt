@@ -1,6 +1,5 @@
 package com.example.busbooking.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel:ViewModel() {
