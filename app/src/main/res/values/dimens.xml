@@ -3,4 +3,5 @@
     <dimen name="buttonSize">12sp</dimen>
     <dimen name="marginStart">10dp</dimen>
     <dimen name="textSize">18sp</dimen>
+    <dimen name="marginBottom">30dp</dimen>
 </resources>

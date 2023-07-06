@@ -437,7 +437,7 @@ class SelectedTripFragment() :
                                     clicked = true
                                 }
                             } else {
-                                button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                                button.setBackgroundResource(R.drawable.seaterbeforeclick)
                                 --noOfSeatsSelected
                                 selectedSeats.remove(button.tag as Int)
                                 binding.totalPrice.text =
