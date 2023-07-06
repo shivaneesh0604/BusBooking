@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +40,9 @@ class HomeFragment : Fragment() {
         val dateFormatToday = SimpleDateFormat("E, dd MMM", Locale.getDefault())
 
         homeBinding.dateID.text = dateFormatToday.format(calendar.time)
-        homeViewModel.selectedDay = dateFormatToday.format(calendar.time)
+        if (homeViewModel.selectedDay == null) {
+            homeViewModel.selectedDay = dateFormatToday.format(calendar.time)
+        }
 
         homeBinding.sourceID.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -61,7 +65,7 @@ class HomeFragment : Fragment() {
             val dateFormat = SimpleDateFormat("E, dd MMM", Locale.getDefault())
 
             homeBinding.dateID.text = dateFormat.format(calendar.time)
-            homeViewModel.selectedDay= dateFormat.format(calendar.time)
+            homeViewModel.selectedDay = dateFormat.format(calendar.time)
         }
 
         homeBinding.tomorrowBtn.setOnClickListener {
@@ -141,9 +145,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (homeViewModel.selectedDay != null) {
-            homeBinding.dateID.text = homeViewModel.selectedDay
-        }
+        Log.e("dateCheck", "dateCheck in onresume")
+        homeBinding.dateID.text = homeViewModel.selectedDay
 
         homeBinding.destID.text = homeViewModel.selectedDestination
 
@@ -168,40 +171,38 @@ class HomeFragment : Fragment() {
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-        // Set the range for the date picker to 5 days from today
-        val maxDateCalendar = Calendar.getInstance()
-        maxDateCalendar.add(Calendar.DAY_OF_MONTH, 5)
-
-
-        // Create a date picker dialog and set the initial date to the current date
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             DatePickerDialog.OnDateSetListener { view: DatePicker?, selectedYear: Int, selectedMonth: Int, selectedDay: Int ->
-                val calendar = Calendar.getInstance()
-                calendar.set(selectedYear, selectedMonth, selectedDay)
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
                 val dateFormat = SimpleDateFormat("E, dd MMM", Locale.getDefault())
 
-                homeBinding.dateID.text = dateFormat.format(calendar.time)
-                this.calendar.set(selectedYear, selectedMonth, selectedDay)
-                homeViewModel.selectedDay = dateFormat.format(calendar.time)
+                homeBinding.dateID.text = dateFormat.format(selectedCalendar.time)
+                homeViewModel.selectedDay = dateFormat.format(selectedCalendar.time)
+                Log.e("dateCheck", "dateCheck in setting function")
             },
             currentYear,
             currentMonth,
             currentDay
         )
 
-        // Set the maximum date allowed in the date picker
+        val maxDateCalendar = Calendar.getInstance()
+        maxDateCalendar.add(Calendar.DAY_OF_MONTH, 5)
         datePickerDialog.datePicker.maxDate = maxDateCalendar.timeInMillis
-        datePickerDialog.datePicker.minDate = calendar.timeInMillis
 
-        // Show the date picker dialog
+        val minDateCalendar = Calendar.getInstance()
+        minDateCalendar.set(currentYear, currentMonth, currentDay)
+        datePickerDialog.datePicker.minDate = minDateCalendar.timeInMillis
+
         datePickerDialog.show()
     }
 
-    fun setSelectedTripLocationData(selectedTripLocation: String, tripLocation: TripLocation){
-        if (tripLocation == TripLocation.Source){
+
+    fun setSelectedTripLocationData(selectedTripLocation: String, tripLocation: TripLocation) {
+        if (tripLocation == TripLocation.Source) {
             homeViewModel.selectedSource = selectedTripLocation
-        }else {
+        } else {
             homeViewModel.selectedDestination = selectedTripLocation
         }
     }
