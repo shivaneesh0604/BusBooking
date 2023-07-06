@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.busbooking.dataclass.SelectedRoutesAndDate
+import com.example.busbooking.model.SelectedRoutesAndDate
 import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
 import com.example.busbooking.recyclerviews.SelectedBusRouteFragmentRecyclerView
@@ -54,9 +54,14 @@ class SelectedBusRouteFragment : Fragment(), SelectedBusRouteFragmentRecyclerVie
     }
 
     override fun selectedBusRoute(selectedTripID: Int,seatingType: SeatingType) {
+        val selectedTripFragment = SelectedTripFragment()
+        selectedTripFragment.arguments = Bundle().apply {
+            putInt("tripID",selectedTripID)
+            putString("seatingType",seatingType.toString())
+        }
         requireActivity().supportFragmentManager.beginTransaction().replace(
             R.id.nav_host_fragment,
-            SelectedTripFragment(selectedTripID,seatingType),
+            selectedTripFragment,
             "SelectedTripFragment"
         ).addToBackStack(null).commit()
     }

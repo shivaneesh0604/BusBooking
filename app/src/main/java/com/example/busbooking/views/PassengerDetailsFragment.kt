@@ -9,19 +9,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.busbooking.dataclass.PassengerDetails
+import com.example.busbooking.model.PassengerDetails
 import com.example.busbooking.recyclerviews.PassengerDetailsFragmentRecyclerView
 import com.example.busbooking.viewmodels.PassengerDetailsViewModel
 import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
 
-class PassengerDetailsFragment(
-    private val passengerDetails: List<PassengerDetails>,
-    private val tripId: Int
-) :
+class PassengerDetailsFragment() :
     Fragment() {
     private lateinit var binding: FragmentPassengerDetailsBinding
     private val passengerDetailsViewModel: PassengerDetailsViewModel by viewModels()
     private var toast: Toast? = null
+    private lateinit var passengerDetails:ArrayList<PassengerDetails>
+    private var tripId:Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            tripId = it.getInt("tripId")
+            passengerDetails = it.getParcelableArrayList<PassengerDetails>("passengerDetails") as ArrayList<PassengerDetails>
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,13 +44,13 @@ class PassengerDetailsFragment(
 
         binding.passengerDetailsRecyclerView.adapter = itemsAdapter
 
-        val passengerDatas = itemsAdapter.getPassengerDetails()
+        val passengerData = itemsAdapter.getPassengerDetails()
 
         binding.bookSeatButton.setOnClickListener {
 
             var check = true
-            for (passengerDetails in passengerDatas) {
-                if (passengerDetails.passengerName.isNotEmpty() && passengerDetails.passengerAge.isNotEmpty() && passengerDetails.gender.isNotEmpty()) {
+            for (passengerDetails in passengerData) {
+                if (passengerDetails.passengerName?.isNotEmpty() == true && passengerDetails.passengerAge?.isNotEmpty() == true && passengerDetails.gender?.isNotEmpty() == true) {
                     check = true
                 } else {
                     check = false

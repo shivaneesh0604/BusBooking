@@ -1,6 +1,7 @@
 package com.example.busbooking.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
@@ -15,12 +16,13 @@ import com.example.busbooking.recyclerviews.TripLocationFragmentRecyclerView
 import com.example.busbooking.databinding.FragmentDestinationBinding
 import java.util.*
 
-class DestinationFragment(private val tripClickListener: TripLocationFragmentRecyclerView.TripClickListener)  : Fragment() {
+class DestinationFragment() : TripLocationFragmentRecyclerView.TripLocationClickListener,
+    Fragment() {
 
     private lateinit var destBinding: FragmentDestinationBinding
     private lateinit var mMenuProvider: MenuProvider
     private val areasList: MutableList<Areas> = mutableListOf()
-    private lateinit var recyclerViewItemsAdapter:TripLocationFragmentRecyclerView
+    private lateinit var recyclerViewItemsAdapter: TripLocationFragmentRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +37,7 @@ class DestinationFragment(private val tripClickListener: TripLocationFragmentRec
         destBinding.destRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewItemsAdapter =
             TripLocationFragmentRecyclerView(
-                requireContext(),
-                areasList as List<Areas>,
-                tripClickListener,
+                requireContext(), areasList as List<Areas>,this,
                 TripLocation.Destination
             )
 
@@ -99,5 +99,15 @@ class DestinationFragment(private val tripClickListener: TripLocationFragmentRec
             recyclerViewItemsAdapter.updateList(filteredList)
 
         }
+    }
+
+    override fun selectedTripLocation(selectedtripLocation: String, tripLocation: TripLocation) {
+
+        val homeFragment =
+            requireActivity().supportFragmentManager.findFragmentByTag("HomeFragment")
+        if (homeFragment is HomeFragment) {
+            homeFragment.setSelectedTripLocationData(selectedtripLocation, tripLocation)
+        }
+        requireActivity().supportFragmentManager.popBackStack()
     }
 }

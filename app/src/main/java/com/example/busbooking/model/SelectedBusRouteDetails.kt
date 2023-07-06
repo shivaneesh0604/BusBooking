@@ -1,4 +1,4 @@
-package com.example.busbooking.dataclass
+package com.example.busbooking.model
 
 import com.example.busbooking.enums.BusType
 import com.example.busbooking.enums.SeatingType

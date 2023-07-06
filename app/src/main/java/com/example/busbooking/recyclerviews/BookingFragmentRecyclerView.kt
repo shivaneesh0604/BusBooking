@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busbooking.dataclass.BookingsDetails
+import com.example.busbooking.model.BookingsDetails
 import com.example.busbooking.R
 
 class BookingFragmentRecyclerView(private val context: Context,private val bookings: List<BookingsDetails>):

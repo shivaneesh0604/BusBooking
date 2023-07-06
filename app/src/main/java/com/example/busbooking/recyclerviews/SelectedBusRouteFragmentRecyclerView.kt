@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busbooking.dataclass.SelectedBusRouteDetails
+import com.example.busbooking.model.SelectedBusRouteDetails
 import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
 

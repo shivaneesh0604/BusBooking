@@ -1,4 +1,4 @@
-package com.example.busbooking.model.database
+package com.example.busbooking.database.database
 
 import android.annotation.SuppressLint
 import com.example.busbooking.entity.*
@@ -35,6 +35,8 @@ object DataProvider {
             Seat(21, 1, 6, 1),
             Seat(22, 1, 6, 2),
             Seat(23, 1, 6, 3),//semi sleeper
+            Seat(24, 1, 6, 4),
+            Seat(25, 1, 7, 1),
 
             Seat(1, 3, 1, 1),
             Seat(2, 3, 1, 2),
@@ -57,8 +59,7 @@ object DataProvider {
             Seat(19, 3, 5, 3),
             Seat(20, 3, 5, 4),
             Seat(21, 3, 6, 1),
-            Seat(22, 3, 6, 2),
-            Seat(23, 3, 6, 3),//semi sleeper(24seats)
+            Seat(22, 3, 6, 2),//semi sleeper(24seats)
 
             Seat(1, 2, 1, 1),
             Seat(2, 2, 1, 2),
@@ -76,8 +77,10 @@ object DataProvider {
             Seat(14, 2, 5, 2),
             Seat(15, 2, 5, 3),
             Seat(16, 2, 6, 1),
-            Seat(17, 2, 6, 2),
-            Seat(18, 2, 6, 3),//sleeper (18 seats)
+            Seat(17, 2, 6, 2),//sleeper (18 seats)
+            Seat(18, 2, 6, 2),
+            Seat(19, 2, 7, 1),
+            Seat(20, 2, 7, 2)
         )
     }
 

@@ -1,9 +1,9 @@
 package com.example.busbooking.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.example.busbooking.dataclass.SelectedBusRouteDetails
-import com.example.busbooking.dataclass.SelectedRoutesAndDate
-import com.example.busbooking.model.datalayer.DataRetriever
+import com.example.busbooking.model.SelectedBusRouteDetails
+import com.example.busbooking.model.SelectedRoutesAndDate
+import com.example.busbooking.database.datalayer.DataRetriever
 
 class SelectedBusFragmentViewModel : ViewModel() {
 

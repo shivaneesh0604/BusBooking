@@ -4,30 +4,31 @@ import android.animation.ObjectAnimator
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.busbooking.enums.TripLocation
-import com.example.busbooking.listener.DatePickerBottomSheetListener
 import com.example.busbooking.R
-import com.example.busbooking.recyclerviews.TripLocationFragmentRecyclerView
 import com.example.busbooking.viewmodels.HomeViewModel
 import com.example.busbooking.databinding.FragmentHomeBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeFragment : Fragment(), DatePickerBottomSheetListener,
-    TripLocationFragmentRecyclerView.TripClickListener {
+class HomeFragment : Fragment() {
 
     private lateinit var homeBinding: FragmentHomeBinding
-    private val homeViewModel: HomeViewModel by activityViewModels()
+    private lateinit var homeViewModel: HomeViewModel
     private val calendar: Calendar = Calendar.getInstance()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,31 +37,18 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         val dateFormatToday = SimpleDateFormat("E, dd MMM", Locale.getDefault())
 
-
         homeBinding.dateID.text = dateFormatToday.format(calendar.time)
         homeViewModel.selectedDay = dateFormatToday.format(calendar.time)
 
-        if (homeViewModel.selectedDay != null) {
-            homeBinding.dateID.text = homeViewModel.selectedDay
-        }
-
-        if (homeViewModel.selectedDestination != null) {
-            homeBinding.destID.text = homeViewModel.selectedDestination
-        }
-
-        if (homeViewModel.selectedSource != null) {
-            homeBinding.sourceID.text = homeViewModel.selectedSource
-        }
-
         homeBinding.sourceID.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, SourceFragment(this), "SourceFragment")
-                .addToBackStack(null).commit()
+                .replace(R.id.nav_host_fragment, SourceFragment(), "SourceFragment")
+                .addToBackStack("SourceFragment").commit()
         }
 
         homeBinding.destID.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, DestinationFragment(this), "DestFragment")
+                .replace(R.id.nav_host_fragment, DestinationFragment(), "DestFragment")
                 .addToBackStack(null).commit()
         }
 
@@ -73,7 +61,7 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
             val dateFormat = SimpleDateFormat("E, dd MMM", Locale.getDefault())
 
             homeBinding.dateID.text = dateFormat.format(calendar.time)
-            homeViewModel.selectedDay = dateFormat.format(calendar.time)
+            homeViewModel.selectedDay= dateFormat.format(calendar.time)
         }
 
         homeBinding.tomorrowBtn.setOnClickListener {
@@ -148,13 +136,19 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
             }
         }
 
-        onResume()
-
         return homeBinding.root
     }
 
     override fun onResume() {
         super.onResume()
+        if (homeViewModel.selectedDay != null) {
+            homeBinding.dateID.text = homeViewModel.selectedDay
+        }
+
+        homeBinding.destID.text = homeViewModel.selectedDestination
+
+        homeBinding.sourceID.text = homeViewModel.selectedSource
+
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.bookingsFrameLayout, BookingsFragment()).addToBackStack(null).commit()
     }
@@ -166,22 +160,6 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
             return TripLocation.Destination
         }
         return null
-    }
-
-    override fun selectedDate(date: String) {
-        homeBinding.dateID.text = date
-        homeViewModel.selectedDay = date
-    }
-
-    override fun selectedTripLocation(selectedTripLocation: String, tripLocation: TripLocation) {
-        requireActivity().supportFragmentManager.popBackStack()
-        if (tripLocation == TripLocation.Source) {
-            homeBinding.sourceID.text = selectedTripLocation
-            homeViewModel.selectedSource = selectedTripLocation
-        } else {
-            homeBinding.destID.text = selectedTripLocation
-            homeViewModel.selectedDestination = selectedTripLocation
-        }
     }
 
     private fun showDatePickerDialog() {
@@ -206,7 +184,6 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
                 homeBinding.dateID.text = dateFormat.format(calendar.time)
                 this.calendar.set(selectedYear, selectedMonth, selectedDay)
                 homeViewModel.selectedDay = dateFormat.format(calendar.time)
-                Log.e("datecheck", "" + homeViewModel.selectedDay)
             },
             currentYear,
             currentMonth,
@@ -219,5 +196,13 @@ class HomeFragment : Fragment(), DatePickerBottomSheetListener,
 
         // Show the date picker dialog
         datePickerDialog.show()
+    }
+
+    fun setSelectedTripLocationData(selectedTripLocation: String, tripLocation: TripLocation){
+        if (tripLocation == TripLocation.Source){
+            homeViewModel.selectedSource = selectedTripLocation
+        }else {
+            homeViewModel.selectedDestination = selectedTripLocation
+        }
     }
 }

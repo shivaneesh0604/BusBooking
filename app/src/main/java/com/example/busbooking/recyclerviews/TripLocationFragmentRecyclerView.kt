@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.busbooking.enums.Areas
 import com.example.busbooking.enums.TripLocation
 import com.example.busbooking.R
+import com.example.busbooking.viewmodels.HomeViewModel
+import java.io.Serializable
 
 class TripLocationFragmentRecyclerView(
     private val context: Context,
     private var tripLocations: List<Areas>,
-    private val tripClickListener: TripClickListener,
+    private val selectedTripLocation: TripLocationClickListener,
     private val tripLocation: TripLocation
 ) : RecyclerView.Adapter<TripLocationFragmentRecyclerView.TripLocationViewHolder>() {
 
@@ -40,7 +44,7 @@ class TripLocationFragmentRecyclerView(
 
         holder.itemView.setOnClickListener {
             Log.e("onclick", "cameTripLocation in TripLocation Class")
-            tripClickListener.selectedTripLocation(item.toString(), tripLocation)
+            selectedTripLocation.selectedTripLocation(item.toString(),tripLocation)
         }
 
     }
@@ -49,7 +53,7 @@ class TripLocationFragmentRecyclerView(
         this.tripLocations = tripLocations
     }
 
-    interface TripClickListener {
-        fun selectedTripLocation(selectedTripLocation: String, tripLocation: TripLocation)
+    interface TripLocationClickListener{
+        fun selectedTripLocation(selectedtripLocation: String,tripLocation: TripLocation)
     }
 }

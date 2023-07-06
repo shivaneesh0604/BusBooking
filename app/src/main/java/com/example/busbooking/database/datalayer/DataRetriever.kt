@@ -1,9 +1,9 @@
-package com.example.busbooking.model.datalayer
+package com.example.busbooking.database.datalayer
 
-import com.example.busbooking.dataclass.*
+import com.example.busbooking.model.*
 import com.example.busbooking.entity.Ticket
 import com.example.busbooking.entity.Trip
-import com.example.busbooking.model.database.Database
+import com.example.busbooking.database.database.Database
 
 class DataRetriever {
 

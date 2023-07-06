@@ -1,4 +1,4 @@
-package com.example.busbooking.dataclass
+package com.example.busbooking.model
 
 data class SelectedRoutesAndDate(
     val selectedBoardingPoint: String,

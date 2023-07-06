@@ -1,6 +1,7 @@
 package com.example.busbooking.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
@@ -15,14 +16,13 @@ import com.example.busbooking.recyclerviews.TripLocationFragmentRecyclerView
 import com.example.busbooking.databinding.FragmentSourceBinding
 import java.util.*
 
-
-class SourceFragment(private val tripClickListener: TripLocationFragmentRecyclerView.TripClickListener) :
+class SourceFragment() : TripLocationFragmentRecyclerView.TripLocationClickListener,
     Fragment() {
 
     private lateinit var sourceBinding: FragmentSourceBinding
     private lateinit var mMenuProvider: MenuProvider
     private val areasList: MutableList<Areas> = mutableListOf()
-    private lateinit var recyclerViewItemsAdapter:TripLocationFragmentRecyclerView
+    private lateinit var recyclerViewItemsAdapter: TripLocationFragmentRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,7 @@ class SourceFragment(private val tripClickListener: TripLocationFragmentRecycler
         sourceBinding.sourceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewItemsAdapter =
             TripLocationFragmentRecyclerView(
-                requireContext(), areasList as List<Areas>, tripClickListener,
+                requireContext(), areasList as List<Areas>, this,
                 TripLocation.Source
             )
 
@@ -101,4 +101,16 @@ class SourceFragment(private val tripClickListener: TripLocationFragmentRecycler
 
         }
     }
+
+    override fun selectedTripLocation(selectedtripLocation: String, tripLocation: TripLocation) {
+
+        val homeFragment =
+            requireActivity().supportFragmentManager.findFragmentByTag("HomeFragment")
+        Log.e("homeVm", "check home Frag $homeFragment")
+        if (homeFragment is HomeFragment) {
+            homeFragment.setSelectedTripLocationData(selectedtripLocation, tripLocation)
+        }
+        requireActivity().supportFragmentManager.popBackStack()
+    }
 }
+

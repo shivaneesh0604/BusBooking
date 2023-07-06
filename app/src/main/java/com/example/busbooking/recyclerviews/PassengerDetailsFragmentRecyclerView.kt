@@ -10,7 +10,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busbooking.dataclass.PassengerDetails
+import com.example.busbooking.model.PassengerDetails
 import com.example.busbooking.R
 import com.google.android.material.textfield.TextInputEditText
 

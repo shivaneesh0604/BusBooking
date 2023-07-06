@@ -1,7 +1,8 @@
-package com.example.busbooking.model.database
+package com.example.busbooking.database.database
 
-import com.example.busbooking.dataclass.PassengerDetails
-import com.example.busbooking.dataclass.SelectedRoutesAndDate
+import android.util.Log
+import com.example.busbooking.model.PassengerDetails
+import com.example.busbooking.model.SelectedRoutesAndDate
 import com.example.busbooking.entity.*
 import com.example.busbooking.enums.BookingStatus
 
@@ -41,6 +42,8 @@ internal object Database {
             }
         }
 
+        Log.e("seatsreturn","seats return is ${seatsList.size}")
+
         return seatsList.toList()
     }
 
@@ -75,8 +78,8 @@ internal object Database {
                 details.seatNumber,
                 trip.perSeatPrice,
                 BookingStatus.Booked,
-                details.passengerName,
-                details.passengerAge.toInt(),
+                details.passengerName!!,
+                details.passengerAge!!.toInt(),
                 passenger.passengerID,
                 trip.boardingArea,
                 trip.droppingArea,
