@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.busbooking.recyclerviews.BookingFragmentRecyclerView
+import com.example.busbooking.recyclerview.BookingFragmentRecyclerView
 import com.example.busbooking.viewmodels.BookingsViewModel
 import com.example.busbooking.databinding.FragmentBookingsBinding
 

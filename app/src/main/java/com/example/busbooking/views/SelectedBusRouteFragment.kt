@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.busbooking.model.SelectedRoutesAndDate
 import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
-import com.example.busbooking.recyclerviews.SelectedBusRouteFragmentRecyclerView
+import com.example.busbooking.recyclerview.SelectedBusRouteFragmentRecyclerView
 import com.example.busbooking.viewmodels.SelectedBusFragmentViewModel
 import com.example.busbooking.databinding.FragmentSelectedBusRouteBinding
 

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.busbooking.enums.Areas
 import com.example.busbooking.enums.TripLocation
 import com.example.busbooking.R
-import com.example.busbooking.recyclerviews.TripLocationFragmentRecyclerView
+import com.example.busbooking.recyclerview.TripLocationFragmentRecyclerView
 import com.example.busbooking.databinding.FragmentSourceBinding
 import java.util.*
 

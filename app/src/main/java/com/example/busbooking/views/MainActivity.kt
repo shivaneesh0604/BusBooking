@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         checkTopAppBar()
         supportFragmentManager.addOnBackStackChangedListener { checkTopAppBar() }
 
@@ -37,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         val topFrag = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
 
         if (topFrag is HomeFragment) {
-            activityMainBinding.sourceToolbar.visibility = View.GONE
-        } else {
-            activityMainBinding.sourceToolbar.visibility = View.VISIBLE
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }else{
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
 

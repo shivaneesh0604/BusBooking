@@ -6,28 +6,34 @@ import com.example.busbooking.database.datalayer.DataRetriever
 
 class SelectedTripFragmentViewModel:ViewModel() {
 
-    private var bookedSeats : List<Int> = mutableListOf()
-    private var seatPrice :Int? = null
-    private lateinit var tripDetails :TripDetails
-    private var seatsList = listOf<Int>()
     private val dataRetriever = DataRetriever()
+    private val selectedSeats:MutableList<Int> = mutableListOf()
 
     fun getBookedSeats(tripId:Int):List<Int>{
-        bookedSeats = dataRetriever.retrieveBookedSeats(tripId)
-        return bookedSeats
+        return dataRetriever.retrieveBookedSeats(tripId)
     }
 
     fun getTripDetails(tripId: Int):TripDetails{
-        tripDetails = dataRetriever.getTripDetails(tripId)
-        return tripDetails
+        return dataRetriever.getTripDetails(tripId)
+
     }
     fun getSeatPrice(tripId: Int):Int?{
-        seatPrice = dataRetriever.retrieveSeatPrice(tripId)
-        return seatPrice
+        return dataRetriever.retrieveSeatPrice(tripId)
     }
 
     fun getSeatsList(tripId: Int):List<Int>{
-        seatsList = dataRetriever.retrieveSeats(tripId)
-        return seatsList
+        return dataRetriever.retrieveSeats(tripId)
+    }
+
+    fun addSelectedSeats(seatNumber : Int){
+        selectedSeats.add(seatNumber)
+    }
+
+    fun removeSelectedSeats(seatNumber: Int){
+        selectedSeats.remove(seatNumber)
+    }
+
+    fun getSelectedSeats():List<Int>{
+        return selectedSeats.toList()
     }
 }

@@ -1,6 +1,7 @@
 package com.example.busbooking.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.busbooking.model.PassengerDetails
-import com.example.busbooking.recyclerviews.PassengerDetailsFragmentRecyclerView
+import com.example.busbooking.recyclerview.PassengerDetailsFragmentRecyclerView
 import com.example.busbooking.viewmodels.PassengerDetailsViewModel
 import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
 
@@ -19,16 +20,23 @@ class PassengerDetailsFragment :
     private lateinit var binding: FragmentPassengerDetailsBinding
     private val passengerDetailsViewModel: PassengerDetailsViewModel by viewModels()
     private var toast: Toast? = null
-    private lateinit var passengerDetails:ArrayList<PassengerDetails>
-    private var tripId:Int = 0
+    private lateinit var passengerDetails: ArrayList<PassengerDetails>
+    private var tripId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             tripId = it.getInt("tripId")
-            passengerDetails = it.getParcelableArrayList<PassengerDetails>("passengerDetails") as ArrayList<PassengerDetails>
+            passengerDetails =
+                it.getParcelableArrayList<PassengerDetails>("passengerDetails") as ArrayList<PassengerDetails>
+        }
+
+        if (savedInstanceState != null) {
+            passengerDetails =
+                savedInstanceState.getParcelableArrayList<PassengerDetails>("passengerDetails") as ArrayList<PassengerDetails>
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +47,7 @@ class PassengerDetailsFragment :
         binding.passengerDetailsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
 
+        Log.e("checkPassengerDetails","checkPassengerDetails $passengerDetails")
         val itemsAdapter =
             PassengerDetailsFragmentRecyclerView(requireContext(), passengerDetails)
 
@@ -84,5 +93,10 @@ class PassengerDetailsFragment :
 
 
         return binding.root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("passengerDetails", passengerDetails)
     }
 }

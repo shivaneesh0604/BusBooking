@@ -1,4 +1,4 @@
-package com.example.busbooking.recyclerviews
+package com.example.busbooking.recyclerview
 
 import android.content.Context
 import android.text.Editable
@@ -37,6 +37,8 @@ class PassengerDetailsFragmentRecyclerView(
         private val passengerName: TextInputEditText = itemView.findViewById(R.id.passengerName)
         private val radioButton: RadioGroup = itemView.findViewById(R.id.radioGroupGender)
         private val passengerAge: TextInputEditText = itemView.findViewById(R.id.passengerAge)
+        val genderMale:RadioButton = itemView.findViewById(R.id.maleGender)
+        val genderFemale:RadioButton = itemView.findViewById(R.id.femaleGender)
 
         init {
             passengerName.addTextChangedListener(object : TextWatcher {
@@ -106,6 +108,11 @@ class PassengerDetailsFragmentRecyclerView(
     override fun onBindViewHolder(holder: PassengerDetailsViewHolder, position: Int) {
         val currentItem = passengerDetails[position]
 
+        if (currentItem.gender == "Male"){
+            holder.genderMale.isChecked = true
+        }else if (currentItem.gender == "Female"){
+            holder.genderFemale.isChecked = true
+        }
         holder.bindData(currentItem)
     }
 

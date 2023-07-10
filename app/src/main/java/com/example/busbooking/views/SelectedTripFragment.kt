@@ -19,7 +19,7 @@ import com.example.busbooking.viewmodels.SelectedTripFragmentViewModel
 import com.example.busbooking.databinding.FragmentSelectedTripBinding
 
 
-class SelectedTripFragment() :
+class SelectedTripFragment :
     Fragment() {
 
     private lateinit var binding: FragmentSelectedTripBinding
@@ -33,13 +33,14 @@ class SelectedTripFragment() :
         arguments?.let {
             selectedTripID = it.getInt("tripID")
             val seatingTypeGot = it.getString("seatingType")
-            if (seatingTypeGot=="SemiSleeper"){
+            if (seatingTypeGot == "SemiSleeper") {
                 seatingType = SeatingType.SemiSleeper
-            }else if (seatingTypeGot == "Sleeper"){
+            } else if (seatingTypeGot == "Sleeper") {
                 seatingType = SeatingType.Sleeper
             }
         }
     }
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,16 +77,17 @@ class SelectedTripFragment() :
         val perSeatPrice = selectedTripViewModel.getSeatPrice(selectedTripID)
 
         val seatsList = selectedTripViewModel.getSeatsList(selectedTripID)
+
+        val selectedSeatsVM = selectedTripViewModel.getSelectedSeats()
+        Log.e("selectedSeatsVM","selectedSeatsVM $selectedSeatsVM")
         var seatsListCount = 0
 
-        var noOfSeatsSelected = 0
+//        val noOfSeatsSelected = selectedSeatsVM.size
         val selectedSeats: MutableList<Int> = mutableListOf()
-
 
         if (seatingType == SeatingType.Sleeper) {
 
             for (i in 0 until seatsList.size / 3) {
-                Log.e("checksize","check size quotient ${seatsList.size / 3}" )
                 val linearLayoutChild = LinearLayout(requireContext())
                 linearLayoutChild.layoutParams = LinearLayout.LayoutParams(
                     LayoutParams.MATCH_PARENT,
@@ -109,11 +111,16 @@ class SelectedTripFragment() :
                             button.setBackgroundResource(R.drawable.sleeperbooked)
                             button.isClickable = false
                         } else {
-                            button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                            if (selectedSeatsVM.contains(button.tag)) {
+                                Log.e("checkSelectedVm","true for value $selectedSeatsVM")
+                                button.setBackgroundResource(R.drawable.sleeperclicked)
+                            } else {
+                                button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                            }
                             button.isClickable = true
                             button.setOnClickListener {
                                 if (!clicked) {
-                                    if (noOfSeatsSelected > 5) {
+                                    if (selectedTripViewModel.getSelectedSeats().size > 5) {
                                         if (toast != null) {
                                             toast!!.cancel()
                                         }
@@ -125,22 +132,22 @@ class SelectedTripFragment() :
                                         toast!!.show()
                                     } else {
                                         button.setBackgroundResource(R.drawable.sleeperclicked)
+                                        selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                         binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                        ++noOfSeatsSelected
-                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                         binding.totalPrice.text =
-                                            (noOfSeatsSelected * perSeatPrice!!).toString()
+                                            (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                         selectedSeats.add(button.tag as Int)
                                         var seatNumberString = ""
                                         for (seatNumber in selectedSeats) {
                                             seatNumberString += if (selectedSeats.size > 1) {
                                                 if (seatNumber == selectedSeats.last()) {
-                                                    seatNumber.toString()
+                                                    seatNumber
                                                 } else {
                                                     "$seatNumber ,"
                                                 }
                                             } else {
-                                                seatNumber.toString()
+                                                seatNumber
                                             }
                                         }
                                         binding.seatsNumbers.text = seatNumberString
@@ -149,24 +156,24 @@ class SelectedTripFragment() :
                                     }
                                 } else {
                                     button.setBackgroundResource(R.drawable.sleeperbeforeclick)
-                                    --noOfSeatsSelected
+                                    selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                     selectedSeats.remove(button.tag as Int)
                                     binding.totalPrice.text =
-                                        (noOfSeatsSelected * perSeatPrice!!).toString()
-                                    if (noOfSeatsSelected == 0) {
+                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                         binding.seatsSelectedLayout.visibility = View.GONE
                                     } else {
-                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
+                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                         var seatNumbersString = ""
                                         for (seatNumber in selectedSeats) {
                                             seatNumbersString += if (selectedSeats.size > 1) {
                                                 if (seatNumber == selectedSeats.last()) {
-                                                    seatNumber.toString()
+                                                    seatNumber
                                                 } else {
                                                     "$seatNumber ,"
                                                 }
                                             } else {
-                                                seatNumber.toString()
+                                                seatNumber
                                             }
                                         }
                                         binding.seatsNumbers.text = seatNumbersString
@@ -195,7 +202,6 @@ class SelectedTripFragment() :
                     20
                 )
                 for (j in 0 until remainingSeatsCount) {
-                    Log.e("checksize","check size remainder ${seatsList.size % 3}" )
                     val button = Button(requireContext())
                     button.layoutParams = LinearLayout.LayoutParams(200, 150)
                     button.tag = seatsList[seatsListCount]
@@ -205,11 +211,16 @@ class SelectedTripFragment() :
                         button.setBackgroundResource(R.drawable.sleeperbooked)
                         button.isClickable = false
                     } else {
-                        button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                        if (selectedSeatsVM.contains(button.tag)) {
+                            Log.e("checkSelectedVm","true for value $selectedSeatsVM")
+                            button.setBackgroundResource(R.drawable.sleeperclicked)
+                        } else {
+                            button.setBackgroundResource(R.drawable.sleeperbeforeclick)
+                        }
                         button.isClickable = true
                         button.setOnClickListener {
                             if (!clicked) {
-                                if (noOfSeatsSelected > 5) {
+                                if (selectedTripViewModel.getSelectedSeats().size > 5) {
                                     if (toast != null) {
                                         toast!!.cancel()
                                     }
@@ -221,22 +232,22 @@ class SelectedTripFragment() :
                                     toast!!.show()
                                 } else {
                                     button.setBackgroundResource(R.drawable.sleeperclicked)
+                                    selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                     binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                    ++noOfSeatsSelected
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                     binding.totalPrice.text =
-                                        (noOfSeatsSelected * perSeatPrice!!).toString()
+                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     selectedSeats.add(button.tag as Int)
                                     var seatNumberString = ""
                                     for (seatNumber in selectedSeats) {
                                         seatNumberString += if (selectedSeats.size > 1) {
                                             if (seatNumber == selectedSeats.last()) {
-                                                seatNumber.toString()
+                                                seatNumber
                                             } else {
                                                 "$seatNumber ,"
                                             }
                                         } else {
-                                            seatNumber.toString()
+                                            seatNumber
                                         }
                                     }
                                     binding.seatsNumbers.text = seatNumberString
@@ -245,24 +256,24 @@ class SelectedTripFragment() :
                                 }
                             } else {
                                 button.setBackgroundResource(R.drawable.sleeperbeforeclick)
-                                --noOfSeatsSelected
+                                selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                 selectedSeats.remove(button.tag as Int)
                                 binding.totalPrice.text =
-                                    (noOfSeatsSelected * perSeatPrice!!).toString()
-                                if (noOfSeatsSelected == 0) {
+                                    (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                     binding.seatsSelectedLayout.visibility = View.GONE
                                 } else {
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
+                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                     var seatNumbersString = ""
                                     for (seatNumber in selectedSeats) {
                                         seatNumbersString += if (selectedSeats.size > 1) {
                                             if (seatNumber == selectedSeats.last()) {
-                                                seatNumber.toString()
+                                                seatNumber
                                             } else {
                                                 "$seatNumber ,"
                                             }
                                         } else {
-                                            seatNumber.toString()
+                                            seatNumber
                                         }
                                     }
                                     binding.seatsNumbers.text = seatNumbersString
@@ -303,12 +314,17 @@ class SelectedTripFragment() :
                             button.setBackgroundResource(R.drawable.seaterbooked)
                             button.isClickable = false
                         } else {
-                            button.setBackgroundResource(R.drawable.seaterbeforeclick)
+                            if (selectedSeatsVM.contains(button.tag)) {
+                                Log.e("checkSelectedVm","true for value $selectedSeatsVM")
+                                button.setBackgroundResource(R.drawable.seaterclicked)
+                            } else {
+                                button.setBackgroundResource(R.drawable.seaterbeforeclick)
+                            }
                             button.isClickable = true
 
                             button.setOnClickListener {
                                 if (!clicked) {
-                                    if (noOfSeatsSelected > 5) {
+                                    if (selectedTripViewModel.getSelectedSeats().size > 5) {
                                         Toast.makeText(
                                             requireContext(),
                                             "Maximum Number Of seats at one transaction can be only 6",
@@ -316,22 +332,22 @@ class SelectedTripFragment() :
                                         ).show()
                                     } else {
                                         button.setBackgroundResource(R.drawable.seaterclicked)
+                                        selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                         binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                        ++noOfSeatsSelected
-                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                         binding.totalPrice.text =
-                                            (noOfSeatsSelected * perSeatPrice!!).toString()
+                                            (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                         selectedSeats.add(button.tag as Int)
                                         var seatNumberString = ""
                                         for (seatNumber in selectedSeats) {
                                             seatNumberString += if (selectedSeats.size > 1) {
                                                 if (seatNumber == selectedSeats.last()) {
-                                                    seatNumber.toString()
+                                                    seatNumber
                                                 } else {
                                                     "$seatNumber ,"
                                                 }
                                             } else {
-                                                seatNumber.toString()
+                                                seatNumber
                                             }
                                         }
                                         binding.seatsNumbers.text = seatNumberString
@@ -340,24 +356,24 @@ class SelectedTripFragment() :
                                     }
                                 } else {
                                     button.setBackgroundResource(R.drawable.seaterbeforeclick)
-                                    --noOfSeatsSelected
+                                    selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                     selectedSeats.remove(button.tag as Int)
                                     binding.totalPrice.text =
-                                        (noOfSeatsSelected * perSeatPrice!!).toString()
-                                    if (noOfSeatsSelected == 0) {
+                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                         binding.seatsSelectedLayout.visibility = View.GONE
                                     } else {
-                                        binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
+                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                         var seatNumbersString = ""
                                         for (seatNumber in selectedSeats) {
                                             seatNumbersString += if (selectedSeats.size > 1) {
                                                 if (seatNumber == selectedSeats.last()) {
-                                                    seatNumber.toString()
+                                                    seatNumber
                                                 } else {
                                                     "$seatNumber ,"
                                                 }
                                             } else {
-                                                seatNumber.toString()
+                                                seatNumber
                                             }
                                         }
                                         binding.seatsNumbers.text = seatNumbersString
@@ -388,7 +404,7 @@ class SelectedTripFragment() :
                     0,
                     20
                 )
-                for (j in 0 until  remainingSeatsCount) {
+                for (j in 0 until remainingSeatsCount) {
                     val button = Button(requireContext())
                     button.layoutParams = LinearLayout.LayoutParams(150, 150)
                     button.tag = seatsList[seatsListCount]
@@ -398,11 +414,16 @@ class SelectedTripFragment() :
                         button.setBackgroundResource(R.drawable.sleeperbooked)
                         button.isClickable = false
                     } else {
-                        button.setBackgroundResource(R.drawable.seaterbeforeclick)
+                        if (selectedSeatsVM.contains(button.tag)) {
+                            Log.e("checkSelectedVm","true for value $selectedSeatsVM")
+                            button.setBackgroundResource(R.drawable.seaterclicked)
+                        } else {
+                            button.setBackgroundResource(R.drawable.seaterbeforeclick)
+                        }
                         button.isClickable = true
                         button.setOnClickListener {
                             if (!clicked) {
-                                if (noOfSeatsSelected > 5) {
+                                if (selectedTripViewModel.getSelectedSeats().size > 5) {
                                     if (toast != null) {
                                         toast!!.cancel()
                                     }
@@ -413,23 +434,23 @@ class SelectedTripFragment() :
                                     )
                                     toast!!.show()
                                 } else {
+                                    selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                     button.setBackgroundResource(R.drawable.seaterclicked)
                                     binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                    ++noOfSeatsSelected
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats | "
+                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                     binding.totalPrice.text =
-                                        (noOfSeatsSelected * perSeatPrice!!).toString()
+                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     selectedSeats.add(button.tag as Int)
                                     var seatNumberString = ""
                                     for (seatNumber in selectedSeats) {
                                         seatNumberString += if (selectedSeats.size > 1) {
                                             if (seatNumber == selectedSeats.last()) {
-                                                seatNumber.toString()
+                                                seatNumber
                                             } else {
                                                 "$seatNumber ,"
                                             }
                                         } else {
-                                            seatNumber.toString()
+                                            seatNumber
                                         }
                                     }
                                     binding.seatsNumbers.text = seatNumberString
@@ -438,24 +459,24 @@ class SelectedTripFragment() :
                                 }
                             } else {
                                 button.setBackgroundResource(R.drawable.seaterbeforeclick)
-                                --noOfSeatsSelected
+                                selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                 selectedSeats.remove(button.tag as Int)
                                 binding.totalPrice.text =
-                                    (noOfSeatsSelected * perSeatPrice!!).toString()
-                                if (noOfSeatsSelected == 0) {
+                                    (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                     binding.seatsSelectedLayout.visibility = View.GONE
                                 } else {
-                                    binding.noOfSeatsBooked.text = "$noOfSeatsSelected seats |"
+                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                     var seatNumbersString = ""
                                     for (seatNumber in selectedSeats) {
                                         seatNumbersString += if (selectedSeats.size > 1) {
                                             if (seatNumber == selectedSeats.last()) {
-                                                seatNumber.toString()
+                                                seatNumber
                                             } else {
                                                 "$seatNumber ,"
                                             }
                                         } else {
-                                            seatNumber.toString()
+                                            seatNumber
                                         }
                                     }
                                     binding.seatsNumbers.text = seatNumbersString
@@ -482,8 +503,8 @@ class SelectedTripFragment() :
 
             val passengerDetailsFragment = PassengerDetailsFragment()
             val bundle = Bundle()
-            bundle.putParcelableArrayList("passengerDetails",passengerDetails)
-            bundle.putInt("tripId",selectedTripID)
+            bundle.putParcelableArrayList("passengerDetails", passengerDetails)
+            bundle.putInt("tripId", selectedTripID)
             passengerDetailsFragment.arguments = bundle
 
             requireActivity().supportFragmentManager.beginTransaction().replace(
@@ -491,11 +512,6 @@ class SelectedTripFragment() :
                 passengerDetailsFragment,
                 "Passenger Details Frag"
             ).addToBackStack(null).commit()
-//                requireActivity().supportFragmentManager.beginTransaction().replace(
-//                    R.id.nav_host_fragment,
-//                    PassengerDetailsFragment(selectedSeats),
-//                    "Passenger Details Frag"
-//                ).addToBackStack(null).commit()
         }
         return binding.root
     }
