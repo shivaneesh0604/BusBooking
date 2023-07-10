@@ -6,158 +6,152 @@
     android:layout_height="match_parent"
     tools:context=".views.SelectedTripFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginEnd="@dimen/marginStart"
-        android:layout_marginBottom="@dimen/marginStart">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginStart"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/marginStart"
+            android:layout_marginBottom="@dimen/marginStart"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marginStart"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/busNameSelectedTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/srs_travels"
+                    android:textSize="@dimen/textSize"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+
+                <LinearLayout
+                    android:id="@+id/ratingsLinearLayout"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginBottom"
+                    android:background="@color/green"
+                    android:gravity="end">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/star"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textSize" />
+
+                    <Button
+                        android:id="@+id/busRatingSelectedTrip"
+                        android:layout_width="35dp"
+                        android:layout_height="20dp"
+                        android:background="@android:color/transparent"
+                        android:text="@string/_4_2"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/marginStart"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/marginStart">
-
-                    <TextView
-                        android:id="@+id/busNameSelectedTrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_toEndOf="@+id/ratingsLinearLayout"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/srs_travels"
-                        android:textSize="@dimen/textSize"
-                        android:textStyle="bold"
-                        tools:ignore="RelativeOverlap" />
-
-                    <LinearLayout
-                        android:id="@+id/ratingsLinearLayout"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:background="@color/green"
-                        android:gravity="end">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/star"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textSize" />
-
-                        <Button
-                            android:id="@+id/busRatingSelectedTrip"
-                            android:layout_width="35dp"
-                            android:layout_height="20dp"
-                            android:background="@android:color/transparent"
-                            android:text="@string/_4_2"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/boardingTimeSelectedTrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/boardingTime"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/droppingTimeSelectedTrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/landingTime" />
-
-                    <TextView
-                        android:id="@+id/dateSelectedTrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStart"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/date" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/boardingTimeSelectedTrip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/boardingTime"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/boardingAreaSelectedTrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/boardingArea" />
+                <TextView
+                    android:id="@+id/droppingTimeSelectedTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/landingTime" />
 
-                    <TextView
-                        android:id="@+id/droppingAreaSelectedTrip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/droppingArea" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/marginStart"
-                    android:background="@color/black" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/dateSelectedTrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/date" />
 
-            <!--            <HorizontalScrollView-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content">-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <!--            </HorizontalScrollView>-->
+                <TextView
+                    android:id="@+id/boardingAreaSelectedTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/boardingArea" />
+
+                <TextView
+                    android:id="@+id/droppingAreaSelectedTrip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/droppingArea" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/marginStart"
+                android:background="@color/black" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/black" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/marginStart"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <ScrollView
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginStart"
+                    android:gravity="center_horizontal"
+                    android:text="@string/drag_to_know_about_seat_types"
+                    android:textAlignment="gravity" />
+
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     tools:ignore="NestedScrolling">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="60dp"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/marginStart"
-                            android:gravity="center_horizontal"
-                            android:text="@string/seat_types"
-                            android:textAlignment="gravity" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -222,19 +216,13 @@
 
                     </LinearLayout>
 
-                </ScrollView>
-
-                <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"
-                    android:layout_marginStart="@dimen/marginBottom"/>
+                </HorizontalScrollView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="290dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="90dp"
+                    android:layout_marginEnd="90dp"
                     android:layout_marginBottom="50dp"
                     app:cardCornerRadius="7dp"
                     app:cardElevation="20dp"
@@ -248,12 +236,17 @@
                             android:id="@+id/steeringImage"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:layout_marginStart="@dimen/marginBottom"
+                            android:layout_marginTop="@dimen/marginBottom"
+                            android:layout_marginEnd="@dimen/marginBottom"
+                            android:layout_marginBottom="@dimen/marginBottom"
                             android:contentDescription="@string/steeringImage"
                             android:src="@drawable/steeringwheel" />
 
                         <View
                             android:id="@+id/lineBelowSteeringImage"
-                            android:layout_width="350dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_below="@+id/steeringImage"
                             android:layout_marginTop="@dimen/marginStart"
@@ -262,17 +255,17 @@
                         <LinearLayout
                             android:id="@+id/seatLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_below="@+id/lineBelowSteeringImage"
                             android:orientation="vertical" />
                     </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
+        </ScrollView>
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
 
     <LinearLayout
         android:id="@+id/seatsSelectedLayout"
@@ -284,7 +277,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp">
+            android:layout_height="30dp">
 
             <TextView
                 android:id="@+id/noOfSeatsBooked"
