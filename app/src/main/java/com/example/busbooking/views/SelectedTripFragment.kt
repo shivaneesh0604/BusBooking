@@ -116,7 +116,7 @@ class SelectedTripFragment :
                                 binding.seatsSelectedLayout.visibility = View.VISIBLE
                                 binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                 binding.totalPrice.text =
-                                    (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 var seatNumberString = ""
                                 for (seatNumber in selectedSeats) {
                                     seatNumberString += if (selectedSeats.size > 1) {
@@ -152,7 +152,7 @@ class SelectedTripFragment :
                                         binding.seatsSelectedLayout.visibility = View.VISIBLE
                                         binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                         binding.totalPrice.text =
-                                            (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                            "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                         var seatNumberString = ""
                                         for (seatNumber in selectedSeats) {
                                             seatNumberString += if (selectedSeats.size > 1) {
@@ -173,7 +173,7 @@ class SelectedTripFragment :
                                     button.setBackgroundResource(R.drawable.sleeperbeforeclick)
                                     selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                     binding.totalPrice.text =
-                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                         binding.seatsSelectedLayout.visibility = View.GONE
                                     } else {
@@ -230,7 +230,7 @@ class SelectedTripFragment :
                             binding.seatsSelectedLayout.visibility = View.VISIBLE
                             binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                             binding.totalPrice.text =
-                                (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                         } else {
                             button.setBackgroundResource(R.drawable.sleeperbeforeclick)
                         }
@@ -253,7 +253,7 @@ class SelectedTripFragment :
                                     binding.seatsSelectedLayout.visibility = View.VISIBLE
                                     binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                     binding.totalPrice.text =
-                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     var seatNumberString = ""
                                     for (seatNumber in selectedSeats) {
                                         seatNumberString += if (selectedSeats.size > 1) {
@@ -274,7 +274,7 @@ class SelectedTripFragment :
                                 button.setBackgroundResource(R.drawable.sleeperbeforeclick)
                                 selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                 binding.totalPrice.text =
-                                    (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                     binding.seatsSelectedLayout.visibility = View.GONE
                                 } else {
@@ -334,7 +334,7 @@ class SelectedTripFragment :
                                 binding.seatsSelectedLayout.visibility = View.VISIBLE
                                 binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                 binding.totalPrice.text =
-                                    (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 var seatNumberString = ""
                                 for (seatNumber in selectedSeats) {
                                     seatNumberString += if (selectedSeats.size > 1) {
@@ -367,7 +367,7 @@ class SelectedTripFragment :
                                         binding.seatsSelectedLayout.visibility = View.VISIBLE
                                         binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                         binding.totalPrice.text =
-                                            (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                            "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                         var seatNumberString = ""
                                         for (seatNumber in selectedSeats) {
                                             seatNumberString += if (selectedSeats.size > 1) {
@@ -388,7 +388,7 @@ class SelectedTripFragment :
                                     button.setBackgroundResource(R.drawable.seaterbeforeclick)
                                     selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                     binding.totalPrice.text =
-                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                         binding.seatsSelectedLayout.visibility = View.GONE
                                     } else {
@@ -448,7 +448,7 @@ class SelectedTripFragment :
                             binding.seatsSelectedLayout.visibility = View.VISIBLE
                             binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                             binding.totalPrice.text =
-                                (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                         } else {
                             button.setBackgroundResource(R.drawable.seaterbeforeclick)
                         }
@@ -471,7 +471,7 @@ class SelectedTripFragment :
                                     binding.seatsSelectedLayout.visibility = View.VISIBLE
                                     binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                     binding.totalPrice.text =
-                                        (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     var seatNumberString = ""
                                     for (seatNumber in selectedSeats) {
                                         seatNumberString += if (selectedSeats.size > 1) {
@@ -492,7 +492,7 @@ class SelectedTripFragment :
                                 button.setBackgroundResource(R.drawable.seaterbeforeclick)
                                 selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                 binding.totalPrice.text =
-                                    (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                     binding.seatsSelectedLayout.visibility = View.GONE
                                 } else {

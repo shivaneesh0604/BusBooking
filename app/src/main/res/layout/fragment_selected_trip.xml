@@ -245,7 +245,6 @@
 
                     <LinearLayout
                         android:id="@+id/seatLayout"
-                        android:layout_marginStart="@dimen/marginStart"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical" />
@@ -268,26 +267,26 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
 
             <TextView
                 android:id="@+id/noOfSeatsBooked"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:text="@string/_1" />
 
             <TextView
                 android:id="@+id/seatsNumbers"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/noOfSeatsBooked"
                 android:text="@string/_1" />
 
             <TextView
                 android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:text="@string/_650"
                 tools:ignore="RelativeOverlap" />
