@@ -236,24 +236,20 @@
                             android:id="@+id/steeringImage"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_margin="5dp"
-                            android:layout_marginStart="@dimen/marginBottom"
-                            android:layout_marginTop="@dimen/marginBottom"
-                            android:layout_marginEnd="@dimen/marginBottom"
-                            android:layout_marginBottom="@dimen/marginBottom"
+                            android:layout_margin="@dimen/marginStart"
                             android:contentDescription="@string/steeringImage"
-                            android:src="@drawable/steeringwheel" />
+                            android:src="@drawable/steering_wheel" />
 
                         <View
                             android:id="@+id/lineBelowSteeringImage"
                             android:layout_width="wrap_content"
                             android:layout_height="1dp"
                             android:layout_below="@+id/steeringImage"
-                            android:layout_marginTop="@dimen/marginStart"
                             android:background="@color/black" />
 
                         <LinearLayout
                             android:id="@+id/seatLayout"
+                            android:layout_marginStart="@dimen/marginStart"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/lineBelowSteeringImage"
@@ -277,28 +273,31 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="40dp">
 
             <TextView
                 android:id="@+id/noOfSeatsBooked"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
+                android:textSize="@dimen/textSize"
                 android:text="@string/_1" />
 
             <TextView
                 android:id="@+id/seatsNumbers"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/noOfSeatsBooked"
+                android:textSize="@dimen/textSize"
                 android:text="@string/_1" />
 
             <TextView
                 android:id="@+id/totalPrice"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:text="@string/_650"
+                android:textSize="@dimen/textSize"
                 tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
