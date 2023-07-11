@@ -33,7 +33,7 @@ class SelectedTripFragmentViewModel:ViewModel() {
         selectedSeats.remove(seatNumber)
     }
 
-    fun getSelectedSeats():MutableList<Int>{
-        return selectedSeats
+    fun getSelectedSeats():List<Int>{
+        return selectedSeats.toList()
     }
 }

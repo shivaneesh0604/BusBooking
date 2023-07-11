@@ -245,6 +245,11 @@
                             android:contentDescription="@string/steeringImage"
                             android:src="@drawable/steering_wheel" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/black"/>
+
                         <LinearLayout
                             android:id="@+id/seatLayout"
                             android:layout_marginStart="@dimen/marginStart"
