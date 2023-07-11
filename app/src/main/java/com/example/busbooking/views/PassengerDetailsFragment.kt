@@ -70,6 +70,7 @@ class PassengerDetailsFragment :
                 if (toast != null) {
                     toast!!.cancel()
                 }
+//                itemsAdapter.passengerDetailsViewHolder.validateFields()
                 Toast.makeText(requireContext(), "Fill all data's", Toast.LENGTH_SHORT).show()
             } else {
                 val ticketConfirmation =

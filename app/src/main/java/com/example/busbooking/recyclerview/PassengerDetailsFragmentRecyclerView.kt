@@ -19,6 +19,7 @@ class PassengerDetailsFragmentRecyclerView(
     private val passengerDetails: List<PassengerDetails>
 ) : RecyclerView.Adapter<PassengerDetailsFragmentRecyclerView.PassengerDetailsViewHolder>() {
 
+    lateinit var passengerDetailsViewHolder: PassengerDetailsViewHolder
     inner class PassengerDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindData(currentItem: PassengerDetails) {
             val editableTextPassengerName =
@@ -92,13 +93,41 @@ class PassengerDetailsFragmentRecyclerView(
             })
 
         }
+
+//        fun validateFields() {
+//            // TODO: need to check this
+//            val passengerName = passengerName.text.toString()
+//            val passengerAge = passengerAge.text.toString()
+//            val radioButtonSelected = radioButton.checkedRadioButtonId != -1
+//
+//            if (passengerName.isEmpty()) {
+//                this.passengerName.error = "Please enter Name"
+//            }
+//
+//            if (passengerAge.isEmpty()){
+//                this.passengerAge.error = "Please enter Age"
+//            }
+//
+//            if (!radioButtonSelected) {
+//                // Show error for unselected radio button
+//                // You can customize this logic based on your requirements
+//                val errorText = "Please select an option"
+//                val radioButton1 = itemView.findViewById<RadioButton>(R.id.maleGender)
+//                val radioButton2 = itemView.findViewById<RadioButton>(R.id.femaleGender)
+//                radioButton1.error = errorText
+//                radioButton2.error = errorText
+//            }
+//
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassengerDetailsViewHolder {
-        return PassengerDetailsViewHolder(
+        passengerDetailsViewHolder =  PassengerDetailsViewHolder(
             LayoutInflater.from(context)
                 .inflate(R.layout.passenger_details_recyclerview, parent, false)
         )
+
+        return passengerDetailsViewHolder
     }
 
     override fun getItemCount(): Int {
