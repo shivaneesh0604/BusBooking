@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/marginStart"
     android:orientation="horizontal"
     android:baselineAligned="false">
 
@@ -171,6 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/marginStart"
                         android:background="@android:color/transparent"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/tomorrow"

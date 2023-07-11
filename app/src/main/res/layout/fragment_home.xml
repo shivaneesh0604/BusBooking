@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/marginStart"
         android:orientation="vertical">
 
         <LinearLayout
@@ -199,11 +198,13 @@
             android:fontFamily="sans-serif-medium"
             android:text="@string/bookings"
             android:textSize="30sp"
+            android:layout_marginStart="@dimen/marginStart"
             android:textStyle="bold" />
 
         <FrameLayout
             android:id="@+id/bookingsFrameLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/marginStart"/>
     </LinearLayout>
 </ScrollView>
