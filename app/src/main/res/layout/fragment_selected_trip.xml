@@ -217,9 +217,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="90dp"
                 app:cardCornerRadius="7dp"
                 app:cardElevation="20dp"
                 app:cardUseCompatPadding="true">

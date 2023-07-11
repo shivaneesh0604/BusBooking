@@ -18,6 +18,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/passengerDetailsRecyclerView"
         android:layout_below="@+id/passengerInfoTV"
+        android:layout_marginBottom="90dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
