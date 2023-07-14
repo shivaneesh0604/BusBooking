@@ -1,6 +1,7 @@
 package com.example.busbooking.views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +16,24 @@ class BookingsFragment : Fragment() {
 
     private lateinit var binding: FragmentBookingsBinding
     private val bookingsViewModel :BookingsViewModel by viewModels()
+    private val bookingsRecyclerView = BookingFragmentRecyclerView()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.e("checkBookings","checkBookings in Bookings Frag")
         // Inflate the layout for this fragment
         binding = FragmentBookingsBinding.inflate(inflater, container, false)
 
         binding.bookingRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val itemsAdapter = BookingFragmentRecyclerView(requireContext(),bookingsViewModel.getBookings() )
-
-        binding.bookingRecyclerView.adapter = itemsAdapter
+        binding.bookingRecyclerView.adapter = bookingsRecyclerView
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bookingsRecyclerView.setData(bookingsViewModel.getBookings())
     }
 }

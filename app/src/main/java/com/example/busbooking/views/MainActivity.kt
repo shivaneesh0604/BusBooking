@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, homeFragment,"HomeFragment").addToBackStack("HomeFragment").commit()
+                .replace(R.id.nav_host_fragment, homeFragment,"HomeFragment").commit()
         }
 
     }

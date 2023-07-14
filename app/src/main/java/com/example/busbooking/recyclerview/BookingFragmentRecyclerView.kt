@@ -1,17 +1,21 @@
 package com.example.busbooking.recyclerview
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.busbooking.model.BookingsDetails
 import com.example.busbooking.R
+import com.example.busbooking.diffutil.BookingsRecyclerViewDiffUtil
 
-class BookingFragmentRecyclerView(private val context: Context,private val bookings: List<BookingsDetails>):
+class BookingFragmentRecyclerView():
     RecyclerView.Adapter<BookingFragmentRecyclerView.BookingsFragmentViewHolder>() {
 
+    private var bookings: List<BookingsDetails> = emptyList()
     class BookingsFragmentViewHolder(view:View):RecyclerView.ViewHolder(view) {
         val date: TextView = view.findViewById(R.id.tripDate)
         val busRoute: TextView = view.findViewById(R.id.busRouteRecyclerView)
@@ -20,7 +24,7 @@ class BookingFragmentRecyclerView(private val context: Context,private val booki
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingsFragmentViewHolder {
         return BookingsFragmentViewHolder(
-            LayoutInflater.from(context)
+            LayoutInflater.from(parent.context)
             .inflate(R.layout.bookings_fragment_recycler_view, parent, false)
         )
     }
@@ -36,5 +40,13 @@ class BookingFragmentRecyclerView(private val context: Context,private val booki
         holder.busRoute.text = item.busRoute
         holder.travelsName.text = item.travelsName
 
+    }
+
+    fun setData(newList: List<BookingsDetails>){
+        Log.e("checkBookings","checkBookings in setData of bookingsFragRecyclerView $newList")
+        val diffUtil = BookingsRecyclerViewDiffUtil(bookings,newList)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtil)
+        bookings = newList
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 }

@@ -20,23 +20,24 @@ class DestinationFragment() : TripLocationFragmentRecyclerView.TripLocationClick
 
     private lateinit var destBinding: FragmentDestinationBinding
     private lateinit var mMenuProvider: MenuProvider
-    private val areasList: MutableList<Areas> = mutableListOf()
+    private val areasList: MutableList<Areas> = mutableListOf<Areas>().apply {
+        for (i in Areas.values()) {
+            this.add(i)
+        }
+    }
     private lateinit var recyclerViewItemsAdapter: TripLocationFragmentRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        for (i in Areas.values()) {
-            areasList.add(i)
-        }
 
         destBinding = FragmentDestinationBinding.inflate(inflater, container, false)
 
         destBinding.destRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerViewItemsAdapter =
             TripLocationFragmentRecyclerView(
-                requireContext(), areasList as List<Areas>,this,
+                requireContext(), areasList as List<Areas>, this,
                 TripLocation.Destination
             )
 

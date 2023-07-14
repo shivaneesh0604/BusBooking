@@ -86,7 +86,7 @@ class DataRetriever {
             val travelsName = Database.getTravelsName(bus!!.travelsID)
             bookingsData[booking.ticketID] = BookingsDetails(
                 booking.boardingTimeAndDate+"-" + booking.droppingTimeAndDate,
-                booking.boardingPoint.toString()+"-" + booking.droppingPoint.toString(),travelsName!!
+                booking.boardingPoint.toString()+"-" + booking.droppingPoint.toString(),travelsName!!,booking.ticketID
             )
         }
         return bookingsData.values.toList()

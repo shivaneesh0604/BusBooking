@@ -24,6 +24,8 @@ class HomeFragment : Fragment() {
     private lateinit var homeBinding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
     private val calendar: Calendar = Calendar.getInstance()
+    private var sourceFragment = SourceFragment()
+    private var destFragment = DestinationFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +48,13 @@ class HomeFragment : Fragment() {
 
         homeBinding.sourceID.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, SourceFragment(), "SourceFragment")
-                .addToBackStack("SourceFragment").commit()
+                .replace(R.id.nav_host_fragment, sourceFragment, "SourceFragment")
+                .addToBackStack(null).commit()
         }
 
         homeBinding.destID.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, DestinationFragment(), "DestFragment")
+                .replace(R.id.nav_host_fragment, destFragment, "DestFragment")
                 .addToBackStack(null).commit()
         }
 
@@ -117,6 +119,7 @@ class HomeFragment : Fragment() {
                         )
                         .addToBackStack(null).commit()
                 }
+
                 TripLocation.Source -> {
                     val warningIcon =
                         ContextCompat.getDrawable(requireContext(), R.drawable.baseline_warning_24)
@@ -127,6 +130,7 @@ class HomeFragment : Fragment() {
                         null
                     )
                 }
+
                 TripLocation.Destination -> {
                     val warningIcon =
                         ContextCompat.getDrawable(requireContext(), R.drawable.baseline_warning_24)
@@ -140,20 +144,19 @@ class HomeFragment : Fragment() {
             }
         }
 
+
         return homeBinding.root
     }
 
     override fun onResume() {
         super.onResume()
-        Log.e("dateCheck", "dateCheck in onresume")
+        Log.e("checkBookings", "onresume of Home frag")
         homeBinding.dateID.text = homeViewModel.selectedDay
-
         homeBinding.destID.text = homeViewModel.selectedDestination
-
         homeBinding.sourceID.text = homeViewModel.selectedSource
 
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.bookingsFrameLayout, BookingsFragment()).addToBackStack(null).commit()
+            .replace(R.id.bookingsFrameLayout, BookingsFragment()).commit()
     }
 
     private fun checkNullValidationForRoutes(): TripLocation? {

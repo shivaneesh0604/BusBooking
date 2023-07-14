@@ -21,16 +21,17 @@ class SourceFragment : TripLocationFragmentRecyclerView.TripLocationClickListene
 
     private lateinit var sourceBinding: FragmentSourceBinding
     private lateinit var mMenuProvider: MenuProvider
-    private val areasList: MutableList<Areas> = mutableListOf()
+    private val areasList: MutableList<Areas> = mutableListOf<Areas>().apply {
+        for (i in Areas.values()) {
+            this.add(i)
+        }
+    }
     private lateinit var recyclerViewItemsAdapter: TripLocationFragmentRecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        for (i in Areas.values()) {
-            areasList.add(i)
-        }
 
         sourceBinding = FragmentSourceBinding.inflate(inflater, container, false)
 
