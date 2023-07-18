@@ -12,11 +12,11 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.busbooking.model.PassengerDetails
-import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
-import com.example.busbooking.viewmodels.SelectedTripFragmentViewModel
 import com.example.busbooking.databinding.FragmentSelectedTripBinding
+import com.example.busbooking.enums.SeatingType
+import com.example.busbooking.model.PassengerDetails
+import com.example.busbooking.viewmodels.SelectedTripFragmentViewModel
 
 
 class SelectedTripFragment :
@@ -49,6 +49,15 @@ class SelectedTripFragment :
 
         binding = FragmentSelectedTripBinding.inflate(inflater, container, false)
 
+    // TODO: check with right side movement
+//        binding.nextButton?.setOnClickListener{
+//            it.scrollTo(
+//                it.scrollX + 10,
+//                it.scrollY
+//            )
+//        }
+
+
         val tripDetails = selectedTripViewModel.getTripDetails(selectedTripID)
 
         binding.busNameSelectedTrip.text = tripDetails.travelsName
@@ -79,7 +88,7 @@ class SelectedTripFragment :
         val seatsList = selectedTripViewModel.getSeatsList(selectedTripID)
 
 //        val selectedSeatsVM = selectedTripViewModel.getSelectedSeats()
-        Log.e("selectedSeatsVM","selectedSeatsVM ${selectedTripViewModel.getSelectedSeats()}")
+        Log.e("selectedSeatsVM", "selectedSeatsVM ${selectedTripViewModel.getSelectedSeats()}")
         var seatsListCount = 0
 
 //        val noOfSeatsSelected = selectedSeatsVM.size
@@ -172,16 +181,23 @@ class SelectedTripFragment :
                                         clicked = true
                                     }
                                 } else {
-                                    Log.e("selectedSeatsVM","check removal before ${selectedTripViewModel.getSelectedSeats()}")
+                                    Log.e(
+                                        "selectedSeatsVM",
+                                        "check removal before ${selectedTripViewModel.getSelectedSeats()}"
+                                    )
                                     button.setBackgroundResource(R.drawable.sleeperbeforeclick)
                                     selectedTripViewModel.removeSelectedSeats(button.tag as Int)
-                                    Log.e("selectedSeatsVM","check removal after ${selectedTripViewModel.getSelectedSeats()}")
+                                    Log.e(
+                                        "selectedSeatsVM",
+                                        "check removal after ${selectedTripViewModel.getSelectedSeats()}"
+                                    )
                                     binding.totalPrice.text =
-                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                         binding.seatsSelectedLayout.visibility = View.GONE
                                     } else {
-                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
+                                        binding.noOfSeatsBooked.text =
+                                            "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                         var seatNumbersString = ""
                                         val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                         for (seatNumber in selectedSeats) {
@@ -233,9 +249,10 @@ class SelectedTripFragment :
                         if (selectedTripViewModel.getSelectedSeats().contains(button.tag)) {
                             button.setBackgroundResource(R.drawable.sleeperclicked)
                             binding.seatsSelectedLayout.visibility = View.VISIBLE
-                            binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                            binding.noOfSeatsBooked.text =
+                                "${selectedTripViewModel.getSelectedSeats().size} seats | "
                             binding.totalPrice.text =
-                                "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                             clicked = true
                         } else {
                             button.setBackgroundResource(R.drawable.sleeperbeforeclick)
@@ -257,9 +274,10 @@ class SelectedTripFragment :
                                     button.setBackgroundResource(R.drawable.sleeperclicked)
                                     selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                     binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                                    binding.noOfSeatsBooked.text =
+                                        "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                     binding.totalPrice.text =
-                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     var seatNumberString = ""
                                     val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                     for (seatNumber in selectedSeats) {
@@ -281,11 +299,12 @@ class SelectedTripFragment :
                                 button.setBackgroundResource(R.drawable.sleeperbeforeclick)
                                 selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                 binding.totalPrice.text =
-                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                     binding.seatsSelectedLayout.visibility = View.GONE
                                 } else {
-                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
+                                    binding.noOfSeatsBooked.text =
+                                        "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                     var seatNumbersString = ""
                                     val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                     for (seatNumber in selectedSeats) {
@@ -340,9 +359,10 @@ class SelectedTripFragment :
                             if (selectedTripViewModel.getSelectedSeats().contains(button.tag)) {
                                 button.setBackgroundResource(R.drawable.seaterclicked)
                                 binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                                binding.noOfSeatsBooked.text =
+                                    "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                 binding.totalPrice.text =
-                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 var seatNumberString = ""
                                 val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                 for (seatNumber in selectedSeats) {
@@ -375,9 +395,10 @@ class SelectedTripFragment :
                                         button.setBackgroundResource(R.drawable.seaterclicked)
                                         selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                         binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                                        binding.noOfSeatsBooked.text =
+                                            "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                         binding.totalPrice.text =
-                                            "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                            "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                         var seatNumberString = ""
                                         val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                         for (seatNumber in selectedSeats) {
@@ -399,11 +420,12 @@ class SelectedTripFragment :
                                     button.setBackgroundResource(R.drawable.seaterbeforeclick)
                                     selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                     binding.totalPrice.text =
-                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                         binding.seatsSelectedLayout.visibility = View.GONE
                                     } else {
-                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
+                                        binding.noOfSeatsBooked.text =
+                                            "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                         var seatNumbersString = ""
                                         val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                         for (seatNumber in selectedSeats) {
@@ -458,9 +480,10 @@ class SelectedTripFragment :
                         if (selectedTripViewModel.getSelectedSeats().contains(button.tag)) {
                             button.setBackgroundResource(R.drawable.seaterclicked)
                             binding.seatsSelectedLayout.visibility = View.VISIBLE
-                            binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                            binding.noOfSeatsBooked.text =
+                                "${selectedTripViewModel.getSelectedSeats().size} seats | "
                             binding.totalPrice.text =
-                                "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                             clicked = true
                         } else {
                             button.setBackgroundResource(R.drawable.seaterbeforeclick)
@@ -482,9 +505,10 @@ class SelectedTripFragment :
                                     selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                     button.setBackgroundResource(R.drawable.seaterclicked)
                                     binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                                    binding.noOfSeatsBooked.text =
+                                        "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                     binding.totalPrice.text =
-                                        "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                        "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     var seatNumberString = ""
                                     val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                     for (seatNumber in selectedSeats) {
@@ -506,11 +530,12 @@ class SelectedTripFragment :
                                 button.setBackgroundResource(R.drawable.seaterbeforeclick)
                                 selectedTripViewModel.removeSelectedSeats(button.tag as Int)
                                 binding.totalPrice.text =
-                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
                                     binding.seatsSelectedLayout.visibility = View.GONE
                                 } else {
-                                    binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats |"
+                                    binding.noOfSeatsBooked.text =
+                                        "${selectedTripViewModel.getSelectedSeats().size} seats |"
                                     var seatNumbersString = ""
                                     val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                     for (seatNumber in selectedSeats) {

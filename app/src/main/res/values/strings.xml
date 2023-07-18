@@ -44,11 +44,12 @@
     <string name="drag_to_know_about_seat_types">Drag To Know About Seat Types</string>
     <string name="seaterbeforeclick">seaterbeforeclick</string>
     <string name="seaterbooked">seaterbooked</string>
-    <string name="seaterclicked">seaterclicked</string>
+    <string name="seaterselected">seaterselected</string>
     <string name="sleeperbeforeclick">sleeperbeforeclick</string>
     <string name="sleeperbooked">sleeperbooked</string>
-    <string name="sleeperclicked">sleeperclicked</string>
+    <string name="sleeperselected">sleeperSelected</string>
     <string name="_1">1</string>
+    <string name="navigate_next">NavigateNext</string>
     <string name="proceed">Proceed</string>
     <string name="primary_passenger_details">Primary Passenger</string>
     <string name="co_passenger_details">Co-Passenger</string>
@@ -66,10 +67,10 @@
     <string name="confirmed">confirmed</string>
     <string name="available">Available Seater</string>
     <string name="booked_seater">Booked Seater</string>
-    <string name="clicked_seater">Clicked Seater</string>
+    <string name="selected_seater">Selected Seater</string>
     <string name="available_sleeper">Available Sleeper</string>
     <string name="booked_sleeper">Booked Sleeper</string>
-    <string name="clicked_sleeper">Clicked Sleeper</string>
+    <string name="selected_sleeper">Selected Sleeper</string>
     <string name="select">Select</string>
     <string name="seat_types">Seat Types</string>
 </resources>

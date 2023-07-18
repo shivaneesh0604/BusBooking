@@ -132,78 +132,93 @@
                 android:text="@string/drag_to_know_about_seat_types"
                 android:textAlignment="gravity" />
 
-            <HorizontalScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <HorizontalScrollView
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginStart"
+                            android:contentDescription="@string/seaterbeforeclick"
+                            android:drawablePadding="@dimen/marginStart"
+                            android:gravity="center_horizontal"
+                            android:text="@string/available"
+                            app:drawableTopCompat="@drawable/seaterbeforeclick" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginStart"
+                            android:contentDescription="@string/seaterbooked"
+                            android:drawablePadding="@dimen/marginStart"
+                            android:gravity="center_horizontal"
+                            android:text="@string/booked_seater"
+                            app:drawableTopCompat="@drawable/seaterbooked" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginStart"
+                            android:contentDescription="@string/seaterselected"
+                            android:drawablePadding="@dimen/marginStart"
+                            android:gravity="center_horizontal"
+                            android:text="@string/selected_seater"
+                            app:drawableTopCompat="@drawable/seaterclicked" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginStart"
+                            android:contentDescription="@string/sleeperbeforeclick"
+                            android:drawablePadding="@dimen/marginStart"
+                            android:gravity="center_horizontal"
+                            android:text="@string/available_sleeper"
+                            app:drawableTopCompat="@drawable/sleeperbeforeclick" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginStart"
+                            android:contentDescription="@string/sleeperbooked"
+                            android:drawablePadding="@dimen/marginStart"
+                            android:gravity="center_horizontal"
+                            android:text="@string/booked_sleeper"
+                            app:drawableTopCompat="@drawable/sleeperbooked" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/marginStart"
+                            android:contentDescription="@string/sleeperselected"
+                            android:drawablePadding="@dimen/marginStart"
+                            android:gravity="center_horizontal"
+                            android:text="@string/selected_sleeper"
+                            app:drawableTopCompat="@drawable/sleeperclicked" />
+
+                    </LinearLayout>
+
+
+                </HorizontalScrollView>
+
+                <ImageView
+                    android:id="@+id/nextButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_margin="@dimen/marginStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/seaterbeforeclick"
-                        android:drawablePadding="@dimen/marginStart"
-                        android:gravity="center_horizontal"
-                        android:text="@string/available"
-                        app:drawableTopCompat="@drawable/seaterbeforeclick" />
-
-                    <TextView
-                        android:layout_margin="@dimen/marginStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/seaterbooked"
-                        android:drawablePadding="@dimen/marginStart"
-                        android:gravity="center_horizontal"
-                        android:text="@string/booked_seater"
-                        app:drawableTopCompat="@drawable/seaterbooked" />
-
-
-                    <TextView
-                        android:layout_margin="@dimen/marginStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/seaterclicked"
-                        android:drawablePadding="@dimen/marginStart"
-                        android:gravity="center_horizontal"
-                        android:text="@string/clicked_seater"
-                        app:drawableTopCompat="@drawable/seaterclicked" />
-
-                    <TextView
-                        android:layout_margin="@dimen/marginStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/sleeperbeforeclick"
-                        android:drawablePadding="@dimen/marginStart"
-                        android:gravity="center_horizontal"
-                        android:text="@string/available_sleeper"
-                        app:drawableTopCompat="@drawable/sleeperbeforeclick" />
-
-                    <TextView
-                        android:layout_margin="@dimen/marginStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/sleeperbooked"
-                        android:drawablePadding="@dimen/marginStart"
-                        android:gravity="center_horizontal"
-                        android:text="@string/booked_sleeper"
-                        app:drawableTopCompat="@drawable/sleeperbooked" />
-
-                    <TextView
-                        android:layout_margin="@dimen/marginStart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/sleeperclicked"
-                        android:drawablePadding="@dimen/marginStart"
-                        android:gravity="center_horizontal"
-                        android:text="@string/clicked_sleeper"
-                        app:drawableTopCompat="@drawable/sleeperclicked" />
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/navigate_next"
+                    android:src="@drawable/baseline_navigate_next_24" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -226,17 +241,17 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_margin="@dimen/marginStart"
                         android:id="@+id/steeringImage"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_margin="@dimen/marginStart"
                         android:contentDescription="@string/steeringImage"
                         android:src="@drawable/steering_wheel" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:background="@color/black"/>
+                        android:background="@color/black" />
 
                     <LinearLayout
                         android:id="@+id/seatLayout"

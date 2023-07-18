@@ -176,10 +176,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/seaterclicked"
+                            android:contentDescription="@string/seaterselected"
                             android:drawablePadding="@dimen/marginStart"
                             android:gravity="center_horizontal"
-                            android:text="@string/clicked_seater"
+                            android:text="@string/selected_seater"
                             app:drawableTopCompat="@drawable/seaterclicked" />
 
                         <TextView
@@ -206,10 +206,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/marginStart"
-                            android:contentDescription="@string/sleeperclicked"
+                            android:contentDescription="@string/sleeperselected"
                             android:drawablePadding="@dimen/marginStart"
                             android:gravity="center_horizontal"
-                            android:text="@string/clicked_sleeper"
+                            android:text="@string/selected_sleeper"
                             app:drawableTopCompat="@drawable/sleeperclicked" />
 
                     </LinearLayout>
