@@ -1,5 +1,6 @@
 package com.example.busbooking.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.busbooking.model.TripDetails
 import com.example.busbooking.database.datalayer.DataRetriever
@@ -13,10 +14,6 @@ class SelectedTripFragmentViewModel:ViewModel() {
         return dataRetriever.retrieveBookedSeats(tripId)
     }
 
-    fun getTripDetails(tripId: Int):TripDetails{
-        return dataRetriever.getTripDetails(tripId)
-
-    }
     fun getSeatPrice(tripId: Int):Int?{
         return dataRetriever.retrieveSeatPrice(tripId)
     }
@@ -34,6 +31,7 @@ class SelectedTripFragmentViewModel:ViewModel() {
     }
 
     fun getSelectedSeats():List<Int>{
+        Log.e("oncreate","getselected seats Called $selectedSeats")
         return selectedSeats.toList()
     }
 }

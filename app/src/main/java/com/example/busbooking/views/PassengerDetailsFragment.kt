@@ -1,19 +1,22 @@
 package com.example.busbooking.views
 
+import android.R.attr
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.busbooking.R
+import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
 import com.example.busbooking.model.PassengerDetails
 import com.example.busbooking.recyclerview.PassengerDetailsFragmentRecyclerView
 import com.example.busbooking.viewmodels.PassengerDetailsViewModel
-import com.example.busbooking.databinding.FragmentPassengerDetailsBinding
+
 
 class PassengerDetailsFragment :
     Fragment() {
@@ -47,7 +50,7 @@ class PassengerDetailsFragment :
         binding.passengerDetailsRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
 
-        Log.e("checkPassengerDetails","checkPassengerDetails $passengerDetails")
+        Log.e("checkPassengerDetails", "checkPassengerDetails $passengerDetails")
         val itemsAdapter =
             PassengerDetailsFragmentRecyclerView(requireContext(), passengerDetails)
 
@@ -84,10 +87,21 @@ class PassengerDetailsFragment :
                         .create()
 
                     alertDialog.show()
-                    requireActivity().supportFragmentManager.popBackStack()
-                    requireActivity().supportFragmentManager.popBackStack()
-                    requireActivity().supportFragmentManager.popBackStack()
 
+                    val fragmentManager = requireActivity().supportFragmentManager
+
+                    // Get the topmost fragment
+                    val topFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment)
+
+                    // Check if the top fragment is not an instance of HomeFragment
+                    if (topFragment !is HomeFragment) {
+                        // Pop the fragments until a HomeFragment is reached
+                        while (fragmentManager.backStackEntryCount > 0 &&
+                            fragmentManager.findFragmentById(R.id.nav_host_fragment) !is HomeFragment
+                        ) {
+                            fragmentManager.popBackStackImmediate()
+                        }
+                    }
                 }
             }
         }

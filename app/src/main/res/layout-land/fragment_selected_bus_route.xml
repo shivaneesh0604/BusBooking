@@ -22,9 +22,28 @@
         android:layout_height="1dp"
         android:background="@color/lightBlack" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/selectedBusRouteRecyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/marginStart" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/selectedBusRouteRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginStart"
+            android:layout_weight="3" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/black" />
+
+        <FrameLayout
+            android:id="@+id/selectedTrip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginStart"
+            android:layout_weight="1" />
+    </LinearLayout>
 </LinearLayout>

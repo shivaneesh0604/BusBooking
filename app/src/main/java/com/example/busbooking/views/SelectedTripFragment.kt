@@ -3,7 +3,6 @@ package com.example.busbooking.views
 import android.annotation.SuppressLint
 import android.app.ActionBar.LayoutParams
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.busbooking.R
 import com.example.busbooking.databinding.FragmentSelectedTripBinding
 import com.example.busbooking.enums.SeatingType
@@ -23,13 +22,15 @@ class SelectedTripFragment :
     Fragment() {
 
     private lateinit var binding: FragmentSelectedTripBinding
-    private val selectedTripViewModel: SelectedTripFragmentViewModel by viewModels()
+    private lateinit var selectedTripViewModel: SelectedTripFragmentViewModel
     private var toast: Toast? = null
-    private var selectedTripID: Int = 0
-    private lateinit var seatingType: SeatingType
+    var selectedTripID: Int = 0
+    lateinit var seatingType: SeatingType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        selectedTripViewModel =
+            ViewModelProvider(this)[SelectedTripFragmentViewModel::class.java]
         arguments?.let {
             selectedTripID = it.getInt("tripID")
             val seatingTypeGot = it.getString("seatingType")
@@ -39,7 +40,9 @@ class SelectedTripFragment :
                 seatingType = SeatingType.Sleeper
             }
         }
+        println("created SelectedTripFrag")
     }
+
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -47,26 +50,10 @@ class SelectedTripFragment :
         savedInstanceState: Bundle?
     ): View {
 
+
         binding = FragmentSelectedTripBinding.inflate(inflater, container, false)
 
-    // TODO: check with right side movement
-//        binding.nextButton?.setOnClickListener{
-//            it.scrollTo(
-//                it.scrollX + 10,
-//                it.scrollY
-//            )
-//        }
-
-
-        val tripDetails = selectedTripViewModel.getTripDetails(selectedTripID)
-
-        binding.busNameSelectedTrip.text = tripDetails.travelsName
-        binding.busRatingSelectedTrip.text = tripDetails.busRating.toString()
-        binding.boardingAreaSelectedTrip.text = tripDetails.boardingArea.toString() + " - "
-        binding.droppingAreaSelectedTrip.text = tripDetails.droppingArea.toString()
-        binding.dateSelectedTrip.text = tripDetails.dateSelectedTrip
-        binding.boardingTimeSelectedTrip.text = tripDetails.boardingTime + " - "
-        binding.droppingTimeSelectedTrip.text = tripDetails.droppingTIme
+        println("selectedSeats is ${selectedTripViewModel.getSelectedSeats()}")
 
         val busLayout = binding.seatLayout
 
@@ -88,7 +75,6 @@ class SelectedTripFragment :
         val seatsList = selectedTripViewModel.getSeatsList(selectedTripID)
 
 //        val selectedSeatsVM = selectedTripViewModel.getSelectedSeats()
-        Log.e("selectedSeatsVM", "selectedSeatsVM ${selectedTripViewModel.getSelectedSeats()}")
         var seatsListCount = 0
 
 //        val noOfSeatsSelected = selectedSeatsVM.size
@@ -123,13 +109,16 @@ class SelectedTripFragment :
                             if (selectedTripViewModel.getSelectedSeats().contains(button.tag)) {
                                 button.setBackgroundResource(R.drawable.sleeperclicked)
                                 binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                                binding.noOfSeatsBooked.text =
+                                    "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                 binding.totalPrice.text =
-                                    "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                    "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                 var seatNumberString = ""
                                 for (seatNumber in selectedTripViewModel.getSelectedSeats()) {
                                     seatNumberString += if (selectedTripViewModel.getSelectedSeats().size > 1) {
-                                        if (seatNumber == selectedTripViewModel.getSelectedSeats().last()) {
+                                        if (seatNumber == selectedTripViewModel.getSelectedSeats()
+                                                .last()
+                                        ) {
                                             seatNumber
                                         } else {
                                             "$seatNumber ,"
@@ -160,9 +149,10 @@ class SelectedTripFragment :
                                         button.setBackgroundResource(R.drawable.sleeperclicked)
                                         selectedTripViewModel.addSelectedSeats(button.tag as Int)
                                         binding.seatsSelectedLayout.visibility = View.VISIBLE
-                                        binding.noOfSeatsBooked.text = "${selectedTripViewModel.getSelectedSeats().size} seats | "
+                                        binding.noOfSeatsBooked.text =
+                                            "${selectedTripViewModel.getSelectedSeats().size} seats | "
                                         binding.totalPrice.text =
-                                            "₹"+(selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
+                                            "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                         var seatNumberString = ""
                                         val selectedSeats = selectedTripViewModel.getSelectedSeats()
                                         for (seatNumber in selectedSeats) {
@@ -181,16 +171,8 @@ class SelectedTripFragment :
                                         clicked = true
                                     }
                                 } else {
-                                    Log.e(
-                                        "selectedSeatsVM",
-                                        "check removal before ${selectedTripViewModel.getSelectedSeats()}"
-                                    )
                                     button.setBackgroundResource(R.drawable.sleeperbeforeclick)
                                     selectedTripViewModel.removeSelectedSeats(button.tag as Int)
-                                    Log.e(
-                                        "selectedSeatsVM",
-                                        "check removal after ${selectedTripViewModel.getSelectedSeats()}"
-                                    )
                                     binding.totalPrice.text =
                                         "₹" + (selectedTripViewModel.getSelectedSeats().size * perSeatPrice!!).toString()
                                     if (selectedTripViewModel.getSelectedSeats().isEmpty()) {
@@ -215,6 +197,7 @@ class SelectedTripFragment :
                                     }
                                     clicked = false
                                 }
+                                println("selectedSeats is ${selectedTripViewModel.getSelectedSeats()}")
                             }
                         }
                         linearLayoutChild.addView(button)
@@ -322,6 +305,7 @@ class SelectedTripFragment :
                                 }
                                 clicked = false
                             }
+                            println("selectedSeats is ${selectedTripViewModel.getSelectedSeats()}")
                         }
                     }
                     linearLayoutChild.addView(button)
@@ -443,6 +427,7 @@ class SelectedTripFragment :
                                     }
                                     clicked = false
                                 }
+                                println("selectedSeats is ${selectedTripViewModel.getSelectedSeats()}")
                             }
                         }
                         linearLayoutChild.addView(button)
@@ -553,6 +538,7 @@ class SelectedTripFragment :
                                 }
                                 clicked = false
                             }
+                            println("selectedSeats is ${selectedTripViewModel.getSelectedSeats()}")
                         }
                     }
                     linearLayoutChild.addView(button)

@@ -49,25 +49,25 @@ class DataRetriever {
         return Database.getSeatsList(trip!!.busID)
     }
 
-    fun getTripDetails(tripId: Int): TripDetails {
-        val trip = Database.getTrip(tripId)
-
-        val bus = Database.getBus(trip!!.busID)
-
-        val travelsName = Database.getTravelsName(bus!!.travelsID)
-
-        return TripDetails(
-            boardingArea = trip.boardingArea,
-            droppingArea = trip.droppingArea,
-            travelsName = travelsName!!,
-            busType = bus.busType,
-            trip.perSeatPrice,
-            bus.busRating,
-            trip.travelDateFrom,
-            trip.boardingTime,
-            trip.droppingTime
-        )
-    }
+//    fun getTripDetails(tripId: Int): TripDetails {
+//        val trip = Database.getTrip(tripId)
+//
+//        val bus = Database.getBus(trip!!.busID)
+//
+//        val travelsName = Database.getTravelsName(bus!!.travelsID)
+//
+//        return TripDetails(
+//            boardingArea = trip.boardingArea,
+//            droppingArea = trip.droppingArea,
+//            travelsName = travelsName!!,
+//            busType = bus.busType,
+//            trip.perSeatPrice,
+//            bus.busRating,
+//            trip.travelDateFrom,
+//            trip.boardingTime,
+//            trip.droppingTime
+//        )
+//    }
 
     fun retrieveSeatPrice(tripId: Int): Int? {
         return Database.getSeatPrice(tripId)

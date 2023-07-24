@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.busbooking.model.SelectedBusRouteDetails
-import com.example.busbooking.enums.SeatingType
 import com.example.busbooking.R
 
 class SelectedBusRouteFragmentRecyclerView(
@@ -46,11 +45,11 @@ class SelectedBusRouteFragmentRecyclerView(
         holder.busRating.text = item.busRating.toString()
         holder.tripFare.text = tripFare
         holder.itemView.setOnClickListener {
-            selectedBusClickListener.selectedBusRoute(item.tripID,item.seatingType)
+            selectedBusClickListener.selectedBusRoute(item.tripID,item.seatingType.toString())
         }
     }
 
     interface SelectedBusClickListener{
-        fun selectedBusRoute(selectedTripID:Int,seatingType: SeatingType)
+        fun selectedBusRoute(selectedTripID:Int, seatingType: String?)
     }
 }

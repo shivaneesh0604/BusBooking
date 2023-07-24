@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,12 +23,17 @@ class HomeFragment : Fragment() {
     private lateinit var homeBinding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
     private val calendar: Calendar = Calendar.getInstance()
-    private var sourceFragment = SourceFragment()
-    private var destFragment = DestinationFragment()
+    private lateinit var sourceFragment :SourceFragment
+    private lateinit var destFragment :DestinationFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        if (!this::sourceFragment.isInitialized){
+            sourceFragment = SourceFragment()
+        }
+        if (!this::destFragment.isInitialized){
+            destFragment = DestinationFragment()
+        }
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
     }
 
@@ -99,7 +103,6 @@ class HomeFragment : Fragment() {
             when (checkNullValidationForRoutes()) {
                 null -> {
 
-                    val selectedBusRouteFragment = SelectedBusRouteFragment()
                     val selectedBusRoutes = Bundle()
                     selectedBusRoutes.putString(
                         "boardingLocation", homeBinding.sourceID.text as String?
@@ -110,14 +113,14 @@ class HomeFragment : Fragment() {
                     selectedBusRoutes.putString(
                         "selectedDate", homeBinding.dateID.text as String?
                     )
+                    val selectedBusRouteFragment = SelectedBusRouteFragment()
                     selectedBusRouteFragment.arguments = selectedBusRoutes
-                    requireActivity().supportFragmentManager.beginTransaction()
+                    parentFragmentManager.beginTransaction()
                         .replace(
                             R.id.nav_host_fragment,
                             selectedBusRouteFragment,
                             "SelectedBusRoute"
-                        )
-                        .addToBackStack(null).commit()
+                        ).addToBackStack(null).commit()
                 }
 
                 TripLocation.Source -> {
@@ -150,11 +153,9 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.e("checkBookings", "onresume of Home frag")
         homeBinding.dateID.text = homeViewModel.selectedDay
         homeBinding.destID.text = homeViewModel.selectedDestination
         homeBinding.sourceID.text = homeViewModel.selectedSource
-
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.bookingsFrameLayout, BookingsFragment()).commit()
     }
@@ -183,7 +184,6 @@ class HomeFragment : Fragment() {
 
                 homeBinding.dateID.text = dateFormat.format(selectedCalendar.time)
                 homeViewModel.selectedDay = dateFormat.format(selectedCalendar.time)
-                Log.e("dateCheck", "dateCheck in setting function")
             },
             currentYear,
             currentMonth,
